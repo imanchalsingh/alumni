@@ -10,6 +10,7 @@ const alumniSchema = new mongoose.Schema(
     organization: String,
     email: String,
     address: String,
+    mobile_number: String,
   },
   { timestamps: true }
 );

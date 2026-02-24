@@ -4,7 +4,7 @@ const router = express.Router();
 
 // Create a new alumni
 router.post("/", async (req, res) => {
-    const { name, batch_year, father_name, course, designation, organization, email, address } = req.body;
+    const { name, batch_year, father_name, course, designation, organization, email, address, mobile_number } = req.body;
     try {
         const newAlumni = new Alumni({
             name,
@@ -15,6 +15,7 @@ router.post("/", async (req, res) => {
             organization,
             email,
             address,
+            mobile_number,
         });
         const savedAlumni = await newAlumni.save();
         res.status(201).json(savedAlumni);
