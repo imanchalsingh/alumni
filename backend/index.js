@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import connectDB from "./src/config/db.js";
 import alumniRoutes from "./src/routes/alumniRoutes.js";
+import adminAlumniRoutes from "./src/routes/adminAlumniRoutes.js";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -13,6 +14,7 @@ app.use(express.json());
 connectDB();
 
 app.use("/api/alumni", alumniRoutes);
+app.use("/api/admin", adminAlumniRoutes);
 
 app.listen(5000, () => {
     console.log("Server running on port 5000");
