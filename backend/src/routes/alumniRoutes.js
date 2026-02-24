@@ -4,7 +4,7 @@ const router = express.Router();
 
 // Create a new alumni
 router.post("/", async (req, res) => {
-    const { name, batch_year, current_position, linkedin_url } = req.body;
+    const { name, batch_year, father_name, course, designation, organization, email, address } = req.body;
     try {
         const newAlumni = new Alumni({
             name,
