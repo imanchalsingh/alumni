@@ -13,14 +13,206 @@ interface Alumni {
   mobile_number?: string;
 }
 
+interface EditModalProps {
+  alumni: Alumni | null;
+  isOpen: boolean;
+  onClose: () => void;
+  onSave: (id: string, updatedData: Partial<Alumni>) => Promise<void>;
+}
+
+const EditModal: React.FC<EditModalProps> = ({ alumni, isOpen, onClose, onSave }) => {
+  const [formData, setFormData] = useState<Partial<Alumni>>({});
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (alumni) {
+      setFormData(alumni);
+    }
+  }, [alumni]);
+
+  if (!isOpen || !alumni) return null;
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await onSave(alumni._id, formData);
+      onClose();
+    } catch (error) {
+      console.error("Error saving:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="px-6 py-4 border-b flex justify-between items-center" style={{ backgroundColor: '#00565c' }}>
+          <h3 className="text-xl font-semibold text-white">Edit Alumni Details</h3>
+          <button onClick={onClose} className="text-white hover:text-gray-200">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Name *</label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name || ''}
+                onChange={handleChange}
+                required
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+                style={{ '--tw-ring-color': '#ba9629' } as React.CSSProperties}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Father's Name</label>
+              <input
+                type="text"
+                name="father_name"
+                value={formData.father_name || ''}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+                style={{ '--tw-ring-color': '#ba9629' } as React.CSSProperties}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Course</label>
+              <input
+                type="text"
+                name="course"
+                value={formData.course || ''}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+                style={{ '--tw-ring-color': '#ba9629' } as React.CSSProperties}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Batch Year *</label>
+              <input
+                type="number"
+                name="batch_year"
+                value={formData.batch_year || ''}
+                onChange={handleChange}
+                required
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+                style={{ '--tw-ring-color': '#ba9629' } as React.CSSProperties}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Designation</label>
+              <input
+                type="text"
+                name="designation"
+                value={formData.designation || ''}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+                style={{ '--tw-ring-color': '#ba9629' } as React.CSSProperties}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Organization</label>
+              <input
+                type="text"
+                name="organization"
+                value={formData.organization || ''}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+                style={{ '--tw-ring-color': '#ba9629' } as React.CSSProperties}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email || ''}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+                style={{ '--tw-ring-color': '#ba9629' } as React.CSSProperties}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Mobile Number</label>
+              <input
+                type="tel"
+                name="mobile_number"
+                value={formData.mobile_number || ''}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+                style={{ '--tw-ring-color': '#ba9629' } as React.CSSProperties}
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Address</label>
+            <textarea
+              name="address"
+              value={formData.address || ''}
+              onChange={handleChange}
+              rows={3}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              style={{ '--tw-ring-color': '#ba9629' } as React.CSSProperties}
+            />
+          </div>
+
+          <div className="flex justify-end space-x-3 pt-4 border-t">
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={loading}
+              className="px-4 py-2 text-white rounded-lg transition-colors disabled:opacity-50"
+              style={{ backgroundColor: '#00565c' }}
+            >
+              {loading ? 'Saving...' : 'Save Changes'}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
 const Alumni: React.FC = () => {
   const [alumni, setAlumni] = useState<Alumni[]>([]);
   const [search, setSearch] = useState<string>("");
   const [selectedYear, setSelectedYear] = useState<string>("all");
   const [selectedView, setSelectedView] = useState<string>("all");
-  const [showForm, setShowForm] = useState<boolean>(false);
   const [years, setYears] = useState<number[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+
+  // Edit modal states
+  const [editingAlumni, setEditingAlumni] = useState<Alumni | null>(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  // Delete confirmation states
+  const [deletingAlumni, setDeletingAlumni] = useState<Alumni | null>(null);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   // Pagination states
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -32,7 +224,7 @@ const Alumni: React.FC = () => {
 
   const fetchAlumni = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/alumni");
+      const res = await fetch("http://localhost:5000/api/admin/alumni/all");
       const data: Alumni[] = await res.json();
       setAlumni(data);
 
@@ -43,6 +235,56 @@ const Alumni: React.FC = () => {
     }
   };
 
+  // update alumni by id
+  const updateAlumni = async (id: string, updatedData: Partial<Alumni>) => {
+    try {
+      const res = await fetch(`http://localhost:5000/api/admin/alumni/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedData),
+      });
+      if (res.ok) {
+        await fetchAlumni();
+      }
+    } catch (error) {
+      console.error("Error updating alumni:", error);
+      throw error;
+    }
+  };
+
+  // delete alumni by id
+  const deleteAlumni = async (id: string) => {
+    try {
+      const res = await fetch(`http://localhost:5000/api/admin/alumni/${id}`, {
+        method: "DELETE",
+      });
+      if (res.ok) {
+        await fetchAlumni();
+        setShowDeleteConfirm(false);
+        setDeletingAlumni(null);
+      }
+    } catch (error) {
+      console.error("Error deleting alumni:", error);
+    }
+  };
+
+  const handleEdit = (alumni: Alumni) => {
+    setEditingAlumni(alumni);
+    setIsEditModalOpen(true);
+  };
+
+  const handleDeleteClick = (alumni: Alumni) => {
+    setDeletingAlumni(alumni);
+    setShowDeleteConfirm(true);
+  };
+
+  const confirmDelete = () => {
+    if (deletingAlumni) {
+      deleteAlumni(deletingAlumni._id);
+    }
+  };
 
   // Filter alumni based on search and selected year
   const filtered = alumni.filter((a) => {
@@ -179,7 +421,6 @@ const Alumni: React.FC = () => {
                   setCurrentPage(1);
                 }}
                 className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none transition-all duration-200"
-                style={{ focusRing: '#ba9629' }}
                 onFocus={(e) => e.target.style.borderColor = '#ba9629'}
                 onBlur={(e) => e.target.style.borderColor = '#e5e7eb'}
               />
@@ -196,9 +437,33 @@ const Alumni: React.FC = () => {
                 key={a._id}
                 className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
               >
-                <div className="px-4 py-3" style={{ background: 'linear-gradient(135deg, #00565c 0%, #003d42 100%)' }}>
-                  <h3 className="text-xl font-semibold text-white truncate">{a.name}</h3>
-                  <p className="text-blue-100 text-sm">Batch of {a.batch_year}</p>
+                <div className="px-4 py-3 flex justify-between items-start" style={{ background: 'linear-gradient(135deg, #00565c 0%, #003d42 100%)' }}>
+                  <div>
+                    <h3 className="text-xl font-semibold text-white truncate">{a.name}</h3>
+                    <p className="text-blue-100 text-sm">Batch of {a.batch_year}</p>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex space-x-2">
+                    <button
+                      onClick={() => handleEdit(a)}
+                      className="p-1.5 rounded-lg bg-white bg-opacity-20 hover:bg-opacity-30 transition-all"
+                      title="Edit"
+                    >
+                      <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                      </svg>
+                    </button>
+                    <button
+                      onClick={() => handleDeleteClick(a)}
+                      className="p-1.5 rounded-lg bg-white bg-opacity-20 hover:bg-opacity-30 transition-all"
+                      title="Delete"
+                    >
+                      <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
 
                 <div className="p-4 space-y-3">
@@ -314,6 +579,51 @@ const Alumni: React.FC = () => {
           )}
         </div>
       </div>
+
+      {/* Edit Modal */}
+      <EditModal
+        alumni={editingAlumni}
+        isOpen={isEditModalOpen}
+        onClose={() => {
+          setIsEditModalOpen(false);
+          setEditingAlumni(null);
+        }}
+        onSave={updateAlumni}
+      />
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteConfirm && deletingAlumni && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-2xl max-w-md w-full">
+            <div className="px-6 py-4 border-b" style={{ backgroundColor: '#dc2626' }}>
+              <h3 className="text-xl font-semibold text-white">Confirm Delete</h3>
+            </div>
+            <div className="p-6">
+              <p className="text-gray-700 mb-4">
+                Are you sure you want to delete <span className="font-semibold">{deletingAlumni.name}</span>?
+                This action cannot be undone.
+              </p>
+              <div className="flex justify-end space-x-3">
+                <button
+                  onClick={() => {
+                    setShowDeleteConfirm(false);
+                    setDeletingAlumni(null);
+                  }}
+                  className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={confirmDelete}
+                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
