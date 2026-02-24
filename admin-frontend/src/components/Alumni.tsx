@@ -447,7 +447,7 @@ const Alumni: React.FC = () => {
                   <div className="flex space-x-2">
                     <button
                       onClick={() => handleEdit(a)}
-                      className="p-1.5 rounded-lg bg-white bg-opacity-20 hover:bg-opacity-30 transition-all"
+                      className="p-1.5 rounded-lg bg-black bg-opacity-20 hover:bg-opacity-30 transition-all"
                       title="Edit"
                     >
                       <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -456,7 +456,7 @@ const Alumni: React.FC = () => {
                     </button>
                     <button
                       onClick={() => handleDeleteClick(a)}
-                      className="p-1.5 rounded-lg bg-white bg-opacity-20 hover:bg-opacity-30 transition-all"
+                      className="p-1.5 rounded-lg bg-red-700 bg-opacity-20 hover:bg-opacity-30 transition-all"
                       title="Delete"
                     >
                       <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
