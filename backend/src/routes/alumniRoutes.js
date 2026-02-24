@@ -54,15 +54,6 @@ router.post("/register", async (req, res) => {
 
 //     res.json({ token });
 // });
-// Get all alumni
-router.get("/", async (req, res) => {
-    try {
-        const alumni = await Alumni.find().sort({ batch_year: -1 });
-        res.json(alumni);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
 
 // get alumni by id
 router.get("/me", alumniAuth, async (req, res) => {
@@ -80,26 +71,6 @@ router.put("/me", alumniAuth, async (req, res) => {
 
     res.json(updated);
 });
-// Get alumni by year
-router.get("/year/:year", async (req, res) => {
-    try {
-        const alumni = await Alumni.find({ batch_year: req.params.year });
-        res.json(alumni);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
 
-// Search by name
-router.get("/search/:name", async (req, res) => {
-    try {
-        const alumni = await Alumni.find({
-            name: { $regex: req.params.name, $options: "i" },
-        });
-        res.json(alumni);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
 
 export default router;
