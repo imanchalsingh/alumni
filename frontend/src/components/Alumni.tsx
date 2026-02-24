@@ -13,17 +13,6 @@ interface Alumni {
   mobile_number?: string;
 }
 
-interface NewAlumni {
-  name: string;
-  father_name: string;
-  batch_year: number | "";
-  designation: string;
-  organization: string;
-  email: string;
-  address: string;
-  mobile_number: string;
-}
-
 const Alumni: React.FC = () => {
   const [alumni, setAlumni] = useState<Alumni[]>([]);
   const [search, setSearch] = useState<string>("");
@@ -32,21 +21,10 @@ const Alumni: React.FC = () => {
   const [showForm, setShowForm] = useState<boolean>(false);
   const [years, setYears] = useState<number[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
-  
+
   // Pagination states
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage] = useState<number>(12);
-
-  const [newAlumni, setNewAlumni] = useState<NewAlumni>({
-    name: "",
-    father_name: "",
-    batch_year: "",
-    designation: "",
-    organization: "",
-    email: "",
-    address: "",
-    mobile_number: "",
-  });
 
   useEffect(() => {
     fetchAlumni();
@@ -65,51 +43,6 @@ const Alumni: React.FC = () => {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setNewAlumni(prev => ({
-      ...prev,
-      [name]: name === "batch_year" ? (value ? Number(value) : "") : value
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!newAlumni.name || !newAlumni.batch_year) {
-      alert("Name and Batch Year are required!");
-      return;
-    }
-
-    try {
-      const res = await fetch("http://localhost:5000/api/alumni", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newAlumni),
-      });
-
-      if (res.ok) {
-        const addedAlumni = await res.json();
-        setAlumni(prev => [...prev, addedAlumni]);
-        setNewAlumni({
-          name: "",
-          father_name: "",
-          batch_year: "",
-          designation: "",
-          organization: "",
-          email: "",
-          address: "",
-          mobile_number: "",
-        });
-        setShowForm(false);
-        fetchAlumni();
-      }
-    } catch (error) {
-      console.error("Error adding alumni:", error);
-    }
-  };
 
   // Filter alumni based on search and selected year
   const filtered = alumni.filter((a) => {
@@ -167,36 +100,15 @@ const Alumni: React.FC = () => {
             <p className="text-sm text-gray-500 mt-1">Directory</p>
           </div>
 
-          {/* Add Alumni Button */}
-          <button
-            onClick={() => {
-              setShowForm(!showForm);
-              setSidebarOpen(false);
-            }}
-            className="w-full mb-6 py-3 px-4 rounded-lg text-white font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
-            style={{ 
-              backgroundColor: '#00565c',
-              boxShadow: '0 4px 6px rgba(0,86,92,0.25)'
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#00474d'}
-            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#00565c'}
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-            </svg>
-            {showForm ? "Close Form" : "Add Alumni"}
-          </button>
-
           {/* Navigation Menu */}
           <nav className="space-y-2">
             {/* All Alumni Button */}
             <button
               onClick={handleAllAlumni}
-              className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-200 flex items-center gap-3 ${
-                selectedView === 'all' 
-                  ? 'text-white' 
-                  : 'text-gray-600 hover:bg-gray-100'
-              }`}
+              className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-200 flex items-center gap-3 ${selectedView === 'all'
+                ? 'text-white'
+                : 'text-gray-600 hover:bg-gray-100'
+                }`}
               style={selectedView === 'all' ? { backgroundColor: '#00565c' } : {}}
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -220,11 +132,10 @@ const Alumni: React.FC = () => {
                     <button
                       key={year}
                       onClick={() => handleYearSelect(year.toString())}
-                      className={`w-full text-left px-4 py-2 rounded-lg transition-all duration-200 flex items-center gap-3 ${
-                        selectedYear === year.toString() 
-                          ? 'text-white' 
-                          : 'text-gray-600 hover:bg-gray-100'
-                      }`}
+                      className={`w-full text-left px-4 py-2 rounded-lg transition-all duration-200 flex items-center gap-3 ${selectedYear === year.toString()
+                        ? 'text-white'
+                        : 'text-gray-600 hover:bg-gray-100'
+                        }`}
                       style={selectedYear === year.toString() ? { backgroundColor: '#5c002c' } : {}}
                     >
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -255,127 +166,6 @@ const Alumni: React.FC = () => {
               Showing {currentItems.length} of {filtered.length} alumni
             </p>
           </div>
-
-          {/* Add Alumni Form */}
-          {showForm && (
-            <div className="bg-white rounded-xl shadow-lg p-6 mb-8 border-t-4" style={{ borderTopColor: '#ba9629' }}>
-              <h3 className="text-xl font-semibold mb-4" style={{ color: '#00565c' }}>Add New Alumni</h3>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Name *</label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={newAlumni.name}
-                      onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
-                      style={{ focusRing: '#ba9629' }}
-                      onFocus={(e) => e.target.style.borderColor = '#ba9629'}
-                      onBlur={(e) => e.target.style.borderColor = '#e5e7eb'}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Father's Name</label>
-                    <input
-                      type="text"
-                      name="father_name"
-                      value={newAlumni.father_name}
-                      onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
-                      onFocus={(e) => e.target.style.borderColor = '#ba9629'}
-                      onBlur={(e) => e.target.style.borderColor = '#e5e7eb'}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Batch Year *</label>
-                    <input
-                      type="number"
-                      name="batch_year"
-                      value={newAlumni.batch_year}
-                      onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
-                      onFocus={(e) => e.target.style.borderColor = '#ba9629'}
-                      onBlur={(e) => e.target.style.borderColor = '#e5e7eb'}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Mobile Number</label>
-                    <input
-                      type="tel"
-                      name="mobile_number"
-                      value={newAlumni.mobile_number}
-                      onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
-                      onFocus={(e) => e.target.style.borderColor = '#ba9629'}
-                      onBlur={(e) => e.target.style.borderColor = '#e5e7eb'}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Designation</label>
-                    <input
-                      type="text"
-                      name="designation"
-                      value={newAlumni.designation}
-                      onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
-                      onFocus={(e) => e.target.style.borderColor = '#ba9629'}
-                      onBlur={(e) => e.target.style.borderColor = '#e5e7eb'}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Organization</label>
-                    <input
-                      type="text"
-                      name="organization"
-                      value={newAlumni.organization}
-                      onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
-                      onFocus={(e) => e.target.style.borderColor = '#ba9629'}
-                      onBlur={(e) => e.target.style.borderColor = '#e5e7eb'}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={newAlumni.email}
-                      onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
-                      onFocus={(e) => e.target.style.borderColor = '#ba9629'}
-                      onBlur={(e) => e.target.style.borderColor = '#e5e7eb'}
-                    />
-                  </div>
-                  <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Address</label>
-                    <textarea
-                      name="address"
-                      value={newAlumni.address}
-                      onChange={handleInputChange}
-                      rows={3}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
-                      onFocus={(e) => e.target.style.borderColor = '#ba9629'}
-                      onBlur={(e) => e.target.style.borderColor = '#e5e7eb'}
-                    />
-                  </div>
-                </div>
-                <div className="flex justify-end">
-                  <button
-                    type="submit"
-                    className="text-white font-semibold py-2 px-6 rounded-lg transition duration-200 ease-in-out"
-                    style={{ backgroundColor: '#00565c' }}
-                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#00474d'}
-                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#00565c'}
-                  >
-                    Add Alumni
-                  </button>
-                </div>
-              </form>
-            </div>
-          )}
 
           {/* Search Bar */}
           <div className="bg-white rounded-xl shadow-sm p-4 mb-6">
@@ -414,7 +204,7 @@ const Alumni: React.FC = () => {
                 <div className="p-4 space-y-3">
                   {a.father_name && (
                     <p className="text-sm text-gray-600 flex items-center gap-2">
-                      <span className="font-medium" style={{ color: '#5c002c' }}>Father:</span> 
+                      <span className="font-medium" style={{ color: '#5c002c' }}>Father:</span>
                       <span>{a.father_name}</span>
                     </p>
                   )}
@@ -430,14 +220,14 @@ const Alumni: React.FC = () => {
 
                   {a.designation && (
                     <p className="text-sm text-gray-600 flex items-center gap-2">
-                      <span className="font-medium" style={{ color: '#5c002c' }}>Designation:</span> 
+                      <span className="font-medium" style={{ color: '#5c002c' }}>Designation:</span>
                       <span>{a.designation}</span>
                     </p>
                   )}
 
                   {a.organization && (
                     <p className="text-sm text-gray-600 flex items-center gap-2">
-                      <span className="font-medium" style={{ color: '#5c002c' }}>Organization:</span> 
+                      <span className="font-medium" style={{ color: '#5c002c' }}>Organization:</span>
                       <span>{a.organization}</span>
                     </p>
                   )}
@@ -473,7 +263,7 @@ const Alumni: React.FC = () => {
               >
                 Previous
               </button>
-              
+
               <div className="flex space-x-1">
                 {[...Array(totalPages)].map((_, index) => {
                   const pageNumber = index + 1;
@@ -486,11 +276,10 @@ const Alumni: React.FC = () => {
                       <button
                         key={pageNumber}
                         onClick={() => paginate(pageNumber)}
-                        className={`w-10 h-10 rounded-lg transition-all duration-200 ${
-                          currentPage === pageNumber
-                            ? 'text-white'
-                            : 'hover:bg-gray-100'
-                        }`}
+                        className={`w-10 h-10 rounded-lg transition-all duration-200 ${currentPage === pageNumber
+                          ? 'text-white'
+                          : 'hover:bg-gray-100'
+                          }`}
                         style={currentPage === pageNumber ? { backgroundColor: '#00565c' } : {}}
                       >
                         {pageNumber}
