@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 interface Alumni {
   _id: string;
@@ -22,9 +23,11 @@ interface NewAlumni {
   email: string;
   address: string;
   mobile_number: string;
+  password?: string;
 }
 
 const Register: React.FC = () => {
+  const navigate = useNavigate();
   const [alumni, setAlumni] = useState<Alumni[]>([]);
   const [newAlumni, setNewAlumni] = useState<NewAlumni>({
     name: "",
@@ -35,6 +38,7 @@ const Register: React.FC = () => {
     email: "",
     address: "",
     mobile_number: "",
+    password: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error', message: string } | null>(null);
@@ -59,7 +63,7 @@ const Register: React.FC = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/alumni", {
+      const res = await fetch("http://localhost:5000/api/alumni/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -79,9 +83,10 @@ const Register: React.FC = () => {
           email: "",
           address: "",
           mobile_number: "",
+          password: "",
         });
         setSubmitStatus({ type: 'success', message: 'Alumni added successfully!' });
-        
+
         // Clear success message after 3 seconds
         setTimeout(() => setSubmitStatus(null), 3000);
       } else {
@@ -96,7 +101,7 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-10">
@@ -111,11 +116,10 @@ const Register: React.FC = () => {
 
         {/* Status Message */}
         {submitStatus && (
-          <div className={`mb-6 p-4 rounded-lg ${
-            submitStatus.type === 'success' 
-              ? 'bg-green-50 border-l-4 border-green-500 text-green-700' 
-              : 'bg-red-50 border-l-4 border-red-500 text-red-700'
-          }`}>
+          <div className={`mb-6 p-4 rounded-lg ${submitStatus.type === 'success'
+            ? 'bg-green-50 border-l-4 border-green-500 text-green-700'
+            : 'bg-red-50 border-l-4 border-red-500 text-red-700'
+            }`}>
             <div className="flex items-center">
               {submitStatus.type === 'success' ? (
                 <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -160,7 +164,7 @@ const Register: React.FC = () => {
                       value={newAlumni.name}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none transition-all duration-200 pl-11"
-                      style={{ 
+                      style={{
                         focusRing: '2px solid #ba9629',
                         borderColor: newAlumni.name ? '#00565c' : undefined
                       }}
@@ -186,7 +190,7 @@ const Register: React.FC = () => {
                       value={newAlumni.father_name}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none transition-all duration-200 pl-11"
-                      style={{ 
+                      style={{
                         borderColor: newAlumni.father_name ? '#00565c' : undefined
                       }}
                       onFocus={(e) => e.target.style.borderColor = '#ba9629'}
@@ -210,7 +214,7 @@ const Register: React.FC = () => {
                       value={newAlumni.batch_year}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none transition-all duration-200 pl-11"
-                      style={{ 
+                      style={{
                         borderColor: newAlumni.batch_year ? '#00565c' : undefined
                       }}
                       onFocus={(e) => e.target.style.borderColor = '#ba9629'}
@@ -235,7 +239,7 @@ const Register: React.FC = () => {
                       value={newAlumni.mobile_number}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none transition-all duration-200 pl-11"
-                      style={{ 
+                      style={{
                         borderColor: newAlumni.mobile_number ? '#00565c' : undefined
                       }}
                       onFocus={(e) => e.target.style.borderColor = '#ba9629'}
@@ -248,7 +252,7 @@ const Register: React.FC = () => {
                 </div>
 
                 {/* Email Field */}
-                <div className="group md:col-span-2">
+                <div className="group">
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
                     Email Address
                   </label>
@@ -259,11 +263,35 @@ const Register: React.FC = () => {
                       value={newAlumni.email}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none transition-all duration-200 pl-11"
-                      style={{ 
+                      style={{
                         borderColor: newAlumni.email ? '#00565c' : undefined
                       }}
                       onFocus={(e) => e.target.style.borderColor = '#ba9629'}
                       onBlur={(e) => e.target.style.borderColor = newAlumni.email ? '#00565c' : '#e5e7eb'}
+                    />
+                    <svg className="w-5 h-5 text-gray-400 absolute left-3 top-3.5 group-focus-within:text-[#ba9629]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* password */}
+                <div className="group">
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Password
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="password"
+                      name="password"
+                      value={newAlumni.password}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none transition-all duration-200 pl-11"
+                      style={{
+                        borderColor: newAlumni.password ? '#00565c' : undefined
+                      }}
+                      onFocus={(e) => e.target.style.borderColor = '#ba9629'}
+                      onBlur={(e) => e.target.style.borderColor = newAlumni.password ? '#00565c' : '#e5e7eb'}
                     />
                     <svg className="w-5 h-5 text-gray-400 absolute left-3 top-3.5 group-focus-within:text-[#ba9629]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -283,7 +311,7 @@ const Register: React.FC = () => {
                       value={newAlumni.designation}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none transition-all duration-200 pl-11"
-                      style={{ 
+                      style={{
                         borderColor: newAlumni.designation ? '#00565c' : undefined
                       }}
                       onFocus={(e) => e.target.style.borderColor = '#ba9629'}
@@ -307,7 +335,7 @@ const Register: React.FC = () => {
                       value={newAlumni.organization}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none transition-all duration-200 pl-11"
-                      style={{ 
+                      style={{
                         borderColor: newAlumni.organization ? '#00565c' : undefined
                       }}
                       onFocus={(e) => e.target.style.borderColor = '#ba9629'}
@@ -331,7 +359,7 @@ const Register: React.FC = () => {
                       onChange={handleInputChange}
                       rows={4}
                       className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none transition-all duration-200 pl-11 resize-none"
-                      style={{ 
+                      style={{
                         borderColor: newAlumni.address ? '#00565c' : undefined
                       }}
                       onFocus={(e) => e.target.style.borderColor = '#ba9629'}
@@ -351,7 +379,7 @@ const Register: React.FC = () => {
                   type="submit"
                   disabled={isSubmitting}
                   className="group relative px-8 py-3 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                  style={{ 
+                  style={{
                     backgroundColor: '#00565c',
                     boxShadow: '0 4px 6px rgba(0,86,92,0.25)'
                   }}
