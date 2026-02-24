@@ -11,6 +11,9 @@ const alumniSchema = new mongoose.Schema(
     email: String,
     address: String,
     mobile_number: String,
+    password:
+      String,
+
   },
   { timestamps: true }
 );
