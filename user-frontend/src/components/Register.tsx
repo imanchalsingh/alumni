@@ -72,8 +72,15 @@ const Register: React.FC = () => {
       });
 
       if (res.ok) {
-        const addedAlumni = await res.json();
-        setAlumni(prev => [...prev, addedAlumni]);
+        if (res.ok) {
+          const data = await res.json();
+
+          // save token
+          localStorage.setItem("alumniToken", data.token);
+
+          // navigate AFTER token saved
+          navigate("/alumni-profile", { replace: true });
+        }
         setNewAlumni({
           name: "",
           father_name: "",
