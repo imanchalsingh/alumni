@@ -1,4 +1,3 @@
-// AlumniProfile.tsx - This is for the alumni site (their own profile)
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
