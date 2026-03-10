@@ -28,7 +28,6 @@ interface NewAlumni {
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
-  const [alumni, setAlumni] = useState<Alumni[]>([]);
   const [newAlumni, setNewAlumni] = useState<NewAlumni>({
     name: "",
     father_name: "",
@@ -79,7 +78,7 @@ const Register: React.FC = () => {
           localStorage.setItem("alumniToken", data.token);
 
           // navigate AFTER token saved
-          navigate("/alumni-profile", { replace: true });
+          navigate("/alumni-dashboard", { replace: true });
         }
         setNewAlumni({
           name: "",
