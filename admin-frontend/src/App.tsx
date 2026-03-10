@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import Login from "./components/AdminLogin"
-import AdminDashboard from './components/AdminDashboard'
+import AdminDashboard from './pages/AdminDashboard'
 
 function App() {
 

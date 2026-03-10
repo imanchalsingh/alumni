@@ -1,14 +1,14 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import Register from './components/Register'
-import AlumniProfile from './components/AlumniProfile'
+import AlumniDashboard from './pages/AlumniDashboard'
 
 function App() {
 
   return (
     <Routes>
       <Route path="/" element={<Register />} />
-      <Route path="/alumni-profile" element={<AlumniProfile />} />
+      <Route path="/alumni-dashboard" element={<AlumniDashboard />} />
     </Routes>
   )
 }
