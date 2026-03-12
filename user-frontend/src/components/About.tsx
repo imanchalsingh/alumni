@@ -1,20 +1,21 @@
 import React from 'react';
 import { GraduationCap, ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const About: React.FC = () => {
+  const navigate = useNavigate()
   // Accent color #80558c (purple)
   const accentColor = '#80558c';
 
   return (
     <div className="min-h-screen bg-white">
+      <div className="fixed inset-0 opacity-5 z-50">
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 border-8 border-white rounded-full">
+          <img src="https://rmlauadm.samarth.edu.in/assets/8b138cd6838ba6b5ed5f22c648a45c25/site_files/rmlau_logo.png" alt="" /></div>
+      </div>
       {/* Hero Section - Simple with image background */}
       <div className="relative overflow-hidden" style={{ background: `linear-gradient(135deg, ${accentColor} 0%, #af7ab3 100%)` }}>
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 opacity-30">
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 border-8 border-white rounded-full">
-              <img src="https://rmlauadm.samarth.edu.in/assets/8b138cd6838ba6b5ed5f22c648a45c25/site_files/rmlau_logo.png" alt="" /></div>
-          </div>
-        </div>
+
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">
@@ -33,7 +34,7 @@ const About: React.FC = () => {
       </div>
 
       {/* About Section - Simple text */}
-      <div className="max-w-4xl mx-auto px-4 py-16">
+      <div id='about' className="max-w-4xl mx-auto px-4 py-16">
         <h2 className="text-3xl font-bold text-gray-900 mb-6">About the Department</h2>
         <div className="prose prose-lg text-gray-600 space-y-4">
           <p>
@@ -108,7 +109,7 @@ const About: React.FC = () => {
       </div>
 
       {/* Faculty Section - Simple */}
-      <div className="max-w-4xl mx-auto px-4 py-16">
+      <div id='faculty' className="max-w-4xl mx-auto px-4 py-16">
         <h2 className="text-3xl font-bold text-gray-900 mb-8">Our Faculty</h2>
 
         <div className="grid md:grid-cols-2 gap-12">
@@ -151,7 +152,7 @@ const About: React.FC = () => {
       </div>
 
       {/* Alumni Success - Simple text with small images */}
-      <div className="bg-gray-50 py-16">
+      <div id="alumni" className="bg-gray-50 py-16">
         <div className="max-w-4xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Our Alumni</h2>
 
@@ -219,16 +220,18 @@ const About: React.FC = () => {
           <div className="flex items-center justify-between">
             {/* Left side - Quick links */}
             <div className="flex items-center gap-6 text-sm">
-              <a href="#" className="text-gray-600 hover:text-gray-900">About</a>
-              <a href="#" className="text-gray-600 hover:text-gray-900">Faculty</a>
-              <a href="#" className="text-gray-600 hover:text-gray-900">Alumni</a>
-              <a href="#" className="text-gray-600 hover:text-gray-900">Contact</a>
+              <a href="#about" className="text-gray-600 hover:text-gray-900">About</a>
+              <a href="#faculty" className="text-gray-600 hover:text-gray-900">Faculty</a>
+              <a href="#alumni" className="text-gray-600 hover:text-gray-900">Alumni</a>
             </div>
 
             {/* Right side - Register Button */}
             <button
               className="px-6 py-2 text-white rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2"
               style={{ backgroundColor: accentColor }}
+              onClick={() => {
+                navigate('/register')
+              }}
             >
               <GraduationCap className="w-4 h-4" />
               Register as Alumni
