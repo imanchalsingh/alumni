@@ -5,6 +5,7 @@ import {
     X,
     LogOut,
     BookOpen,
+    ChevronRight,
 } from 'lucide-react'
 import Alumni from '../components/Alumni'
 import Workshop from '../components/Workshops';
@@ -20,11 +21,13 @@ interface Workshop {
     enrolled: number;
 }
 
-
 const AdminDashboard: React.FC = () => {
     const navigate = useNavigate();
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [activeTab, setActiveTab] = useState('alumni');
+
+    // Dark yellow accent color
+    const accentColor = '#ba9629';
 
     const navItems = [
         { id: 'alumni', label: 'Alumni Meets', icon: GraduationCap },
@@ -53,8 +56,9 @@ const AdminDashboard: React.FC = () => {
                     >
                         <Menu className="w-6 h-6 text-gray-600" />
                     </button>
-                    <h1 className="text-xl font-semibold text-[#00565c]">Admin Panel</h1>
+                    <h1 className="text-xl font-semibold" style={{ color: accentColor }}>Admin Panel</h1>
                 </div>
+
             </div>
 
             {/* Sidebar Overlay */}
@@ -76,7 +80,12 @@ const AdminDashboard: React.FC = () => {
                     {/* Sidebar Header */}
                     <div className="p-6 border-b border-gray-200">
                         <div className="flex items-center justify-between">
-                            <h2 className="text-xl font-bold text-[#00565c]">Admin Panel</h2>
+                            <div className="flex items-center gap-2">
+                                <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: accentColor }}>
+                                    <GraduationCap className="w-5 h-5 text-white" />
+                                </div>
+                                <h2 className="text-xl font-bold" style={{ color: accentColor }}>Admin Panel</h2>
+                            </div>
                             <button
                                 onClick={() => setSidebarOpen(false)}
                                 className="lg:hidden p-2 hover:bg-gray-100 rounded-lg"
@@ -88,6 +97,7 @@ const AdminDashboard: React.FC = () => {
 
                     {/* Navigation */}
                     <nav className="flex-1 overflow-y-auto p-4">
+                        <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-4">Main Menu</p>
                         <ul className="space-y-2">
                             {navItems.map((item) => {
                                 const Icon = item.icon;
@@ -99,15 +109,19 @@ const AdminDashboard: React.FC = () => {
                                                 setSidebarOpen(false);
                                             }}
                                             className={`
-                        w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors
+                        w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200
                         ${activeTab === item.id
-                                                    ? 'bg-[#00565c] text-white'
+                                                    ? 'text-white'
                                                     : 'text-gray-600 hover:bg-gray-100'
                                                 }
                       `}
+                                            style={activeTab === item.id ? { backgroundColor: accentColor } : {}}
                                         >
                                             <Icon className="w-5 h-5" />
-                                            <span className="font-medium">{item.label}</span>
+                                            <span className="font-medium flex-1 text-left">{item.label}</span>
+                                            {activeTab === item.id && (
+                                                <ChevronRight className="w-4 h-4 text-white" />
+                                            )}
                                         </button>
                                     </li>
                                 );
@@ -116,10 +130,22 @@ const AdminDashboard: React.FC = () => {
                     </nav>
 
                     {/* Sidebar Footer */}
-                    <div className="p-4 border-t border-gray-200">
-                        <button onClick={() => {
-                            navigate('/')
-                        }} className="w-full flex items-center space-x-3 px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition-colors mt-1">
+                    <div className="p-4 border-t border-gray-200 space-y-2">
+                        <button
+                            onClick={() => {
+                                navigate('/');
+                                localStorage.removeItem('adminToken');
+                                sessionStorage.removeItem('adminToken');
+                            }}
+                            className="w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors"
+                            style={{ color: '#dc2626' }}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.backgroundColor = '#fee2e2';
+                            }}
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.backgroundColor = 'transparent';
+                            }}
+                        >
                             <LogOut className="w-5 h-5" />
                             <span className="font-medium">Logout</span>
                         </button>
@@ -130,6 +156,27 @@ const AdminDashboard: React.FC = () => {
             {/* Main Content */}
             <main className="lg:ml-64 p-4 lg:p-8">
                 <div className="max-w-7xl mx-auto">
+                    {/* Tab Navigation for Mobile */}
+                    <div className="lg:hidden mb-6">
+                        <div className="flex gap-2 overflow-x-auto pb-2">
+                            {navItems.map((item) => {
+                                const Icon = item.icon;
+                                return (
+                                    <button
+                                        key={item.id}
+                                        onClick={() => setActiveTab(item.id)}
+                                        className={`flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-colors ${activeTab === item.id ? 'text-white' : 'text-gray-600 bg-gray-100'
+                                            }`}
+                                        style={activeTab === item.id ? { backgroundColor: accentColor } : {}}
+                                    >
+                                        <Icon className="w-4 h-4" />
+                                        <span className="text-sm font-medium">{item.label}</span>
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </div>
+
                     {/* Dynamic Content */}
                     {renderContent()}
                 </div>

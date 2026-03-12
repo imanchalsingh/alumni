@@ -53,7 +53,7 @@ const EditModal: React.FC<EditModalProps> = ({ alumni, isOpen, onClose, onSave }
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="px-6 py-4 border-b flex justify-between items-center" style={{ backgroundColor: '#00565c' }}>
+        <div className="px-6 py-4 border-b flex justify-between items-center" style={{ backgroundColor: '#ba9629' }}>
           <h3 className="text-xl font-semibold text-white">Edit Alumni Details</h3>
           <button onClick={onClose} className="text-white hover:text-gray-200">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -72,8 +72,7 @@ const EditModal: React.FC<EditModalProps> = ({ alumni, isOpen, onClose, onSave }
                 value={formData.name || ''}
                 onChange={handleChange}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
-                style={{ '--tw-ring-color': '#ba9629' } as React.CSSProperties}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ba9629]/20 focus:border-[#ba9629] transition-all"
               />
             </div>
 
@@ -84,8 +83,7 @@ const EditModal: React.FC<EditModalProps> = ({ alumni, isOpen, onClose, onSave }
                 name="father_name"
                 value={formData.father_name || ''}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
-                style={{ '--tw-ring-color': '#ba9629' } as React.CSSProperties}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ba9629]/20 focus:border-[#ba9629] transition-all"
               />
             </div>
 
@@ -96,8 +94,7 @@ const EditModal: React.FC<EditModalProps> = ({ alumni, isOpen, onClose, onSave }
                 name="course"
                 value={formData.course || ''}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
-                style={{ '--tw-ring-color': '#ba9629' } as React.CSSProperties}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ba9629]/20 focus:border-[#ba9629] transition-all"
               />
             </div>
 
@@ -109,8 +106,7 @@ const EditModal: React.FC<EditModalProps> = ({ alumni, isOpen, onClose, onSave }
                 value={formData.batch_year || ''}
                 onChange={handleChange}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
-                style={{ '--tw-ring-color': '#ba9629' } as React.CSSProperties}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ba9629]/20 focus:border-[#ba9629] transition-all"
               />
             </div>
 
@@ -121,8 +117,7 @@ const EditModal: React.FC<EditModalProps> = ({ alumni, isOpen, onClose, onSave }
                 name="designation"
                 value={formData.designation || ''}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
-                style={{ '--tw-ring-color': '#ba9629' } as React.CSSProperties}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ba9629]/20 focus:border-[#ba9629] transition-all"
               />
             </div>
 
@@ -133,8 +128,7 @@ const EditModal: React.FC<EditModalProps> = ({ alumni, isOpen, onClose, onSave }
                 name="organization"
                 value={formData.organization || ''}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
-                style={{ '--tw-ring-color': '#ba9629' } as React.CSSProperties}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ba9629]/20 focus:border-[#ba9629] transition-all"
               />
             </div>
 
@@ -145,8 +139,7 @@ const EditModal: React.FC<EditModalProps> = ({ alumni, isOpen, onClose, onSave }
                 name="email"
                 value={formData.email || ''}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
-                style={{ '--tw-ring-color': '#ba9629' } as React.CSSProperties}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ba9629]/20 focus:border-[#ba9629] transition-all"
               />
             </div>
 
@@ -157,8 +150,7 @@ const EditModal: React.FC<EditModalProps> = ({ alumni, isOpen, onClose, onSave }
                 name="mobile_number"
                 value={formData.mobile_number || ''}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
-                style={{ '--tw-ring-color': '#ba9629' } as React.CSSProperties}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ba9629]/20 focus:border-[#ba9629] transition-all"
               />
             </div>
           </div>
@@ -170,8 +162,7 @@ const EditModal: React.FC<EditModalProps> = ({ alumni, isOpen, onClose, onSave }
               value={formData.address || ''}
               onChange={handleChange}
               rows={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
-              style={{ '--tw-ring-color': '#ba9629' } as React.CSSProperties}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ba9629]/20 focus:border-[#ba9629] transition-all"
             />
           </div>
 
@@ -186,8 +177,8 @@ const EditModal: React.FC<EditModalProps> = ({ alumni, isOpen, onClose, onSave }
             <button
               type="submit"
               disabled={loading}
-              className="px-4 py-2 text-white rounded-lg transition-colors disabled:opacity-50"
-              style={{ backgroundColor: '#00565c' }}
+              className="px-4 py-2 text-white rounded-lg transition-colors disabled:opacity-50 hover:opacity-90"
+              style={{ backgroundColor: '#ba9629' }}
             >
               {loading ? 'Saving...' : 'Save Changes'}
             </button>
@@ -407,13 +398,17 @@ const Alumni: React.FC = () => {
     window.URL.revokeObjectURL(url);
   };
 
+  // Dark yellow accent color
+  const accentColor = '#ba9629';
+  const accentGradient = 'linear-gradient(135deg, #ba9629 0%, #9e7f22 100%)';
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Main Content */}
       <div className="py-8 px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold" style={{ color: '#00565c' }}>BCA Alumni Directory</h1>
+          <h1 className="text-3xl font-bold" style={{ color: accentColor }}>BCA Alumni Directory</h1>
           <p className="text-gray-500 mt-1">Manage and view alumni information</p>
         </div>
 
@@ -432,7 +427,7 @@ const Alumni: React.FC = () => {
                 }}
                 className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none transition-all duration-200"
                 style={{ borderColor: '#e5e7eb' }}
-                onFocus={(e) => e.target.style.borderColor = '#00565c'}
+                onFocus={(e) => e.target.style.borderColor = accentColor}
                 onBlur={(e) => e.target.style.borderColor = '#e5e7eb'}
               />
               <svg className="w-5 h-5 text-gray-400 absolute left-3 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -447,7 +442,7 @@ const Alumni: React.FC = () => {
                 onChange={handleYearChange}
                 className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none transition-all duration-200 bg-white"
                 style={{ borderColor: '#e5e7eb' }}
-                onFocus={(e) => e.target.style.borderColor = '#00565c'}
+                onFocus={(e) => e.target.style.borderColor = accentColor}
                 onBlur={(e) => e.target.style.borderColor = '#e5e7eb'}
               >
                 <option value="all">All Batches ({alumni.length})</option>
@@ -467,7 +462,7 @@ const Alumni: React.FC = () => {
               <button
                 onClick={downloadCSV}
                 className="px-4 py-3 rounded-xl text-white transition-all duration-200 hover:shadow-md flex items-center gap-2"
-                style={{ backgroundColor: '#00565c' }}
+                style={{ backgroundColor: accentColor }}
                 title="Download as CSV"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -478,7 +473,7 @@ const Alumni: React.FC = () => {
               <button
                 onClick={downloadExcel}
                 className="px-4 py-3 rounded-xl text-white transition-all duration-200 hover:shadow-md flex items-center gap-2"
-                style={{ backgroundColor: '#00565c' }}
+                style={{ backgroundColor: accentColor }}
                 title="Download as Excel"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -507,10 +502,10 @@ const Alumni: React.FC = () => {
               key={a._id}
               className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
             >
-              <div className="px-4 py-3 flex justify-between items-start" style={{ background: 'linear-gradient(135deg, #00565c 0%, #003d42 100%)' }}>
+              <div className="px-4 py-3 flex justify-between items-start" style={{ background: accentGradient }}>
                 <div>
                   <h3 className="text-xl font-semibold text-white truncate">{a.name}</h3>
-                  <p className="text-blue-100 text-sm">Batch of {a.batch_year}</p>
+                  <p className="text-yellow-100 text-sm">Batch of {a.batch_year}</p>
                 </div>
 
                 {/* Action Buttons */}
@@ -539,15 +534,15 @@ const Alumni: React.FC = () => {
               <div className="p-4 space-y-3">
                 {a.father_name && (
                   <p className="text-sm text-gray-600 flex items-center gap-2">
-                    <span className="font-medium" style={{ color: '#00565c' }}>Father:</span>
+                    <span className="font-medium" style={{ color: accentColor }}>Father:</span>
                     <span>{a.father_name}</span>
                   </p>
                 )}
 
                 {a.mobile_number && (
                   <p className="text-sm text-gray-600 flex items-center gap-2">
-                    <span className="font-medium" style={{ color: '#00565c' }}>Mobile:</span>
-                    <a href={`tel:${a.mobile_number}`} className="hover:underline" style={{ color: '#00565c' }}>
+                    <span className="font-medium" style={{ color: accentColor }}>Mobile:</span>
+                    <a href={`tel:${a.mobile_number}`} className="hover:underline" style={{ color: accentColor }}>
                       {a.mobile_number}
                     </a>
                   </p>
@@ -555,22 +550,22 @@ const Alumni: React.FC = () => {
 
                 {a.designation && (
                   <p className="text-sm text-gray-600 flex items-center gap-2">
-                    <span className="font-medium" style={{ color: '#00565c' }}>Designation:</span>
+                    <span className="font-medium" style={{ color: accentColor }}>Designation:</span>
                     <span>{a.designation}</span>
                   </p>
                 )}
 
                 {a.organization && (
                   <p className="text-sm text-gray-600 flex items-center gap-2">
-                    <span className="font-medium" style={{ color: '#00565c' }}>Organization:</span>
+                    <span className="font-medium" style={{ color: accentColor }}>Organization:</span>
                     <span>{a.organization}</span>
                   </p>
                 )}
 
                 {a.email && (
                   <p className="text-sm text-gray-600 flex items-center gap-2">
-                    <span className="font-medium" style={{ color: '#00565c' }}>Email:</span>
-                    <a href={`mailto:${a.email}`} className="hover:underline truncate" style={{ color: '#00565c' }}>
+                    <span className="font-medium" style={{ color: accentColor }}>Email:</span>
+                    <a href={`mailto:${a.email}`} className="hover:underline truncate" style={{ color: accentColor }}>
                       {a.email}
                     </a>
                   </p>
@@ -578,7 +573,7 @@ const Alumni: React.FC = () => {
 
                 {a.address && (
                   <p className="text-sm text-gray-600 flex items-start gap-2">
-                    <span className="font-medium" style={{ color: '#00565c' }}>Address:</span>
+                    <span className="font-medium" style={{ color: accentColor }}>Address:</span>
                     <span className="flex-1">{a.address}</span>
                   </p>
                 )}
@@ -594,7 +589,7 @@ const Alumni: React.FC = () => {
               onClick={() => paginate(currentPage - 1)}
               disabled={currentPage === 1}
               className="px-4 py-2 rounded-lg border disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md"
-              style={{ borderColor: '#00565c', color: '#00565c' }}
+              style={{ borderColor: accentColor, color: accentColor }}
             >
               Previous
             </button>
@@ -616,7 +611,7 @@ const Alumni: React.FC = () => {
                           ? 'text-white'
                           : 'hover:bg-gray-100'
                       }`}
-                      style={currentPage === pageNumber ? { backgroundColor: '#00565c' } : {}}
+                      style={currentPage === pageNumber ? { backgroundColor: accentColor } : {}}
                     >
                       {pageNumber}
                     </button>
@@ -635,7 +630,7 @@ const Alumni: React.FC = () => {
               onClick={() => paginate(currentPage + 1)}
               disabled={currentPage === totalPages}
               className="px-4 py-2 rounded-lg border disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md"
-              style={{ borderColor: '#00565c', color: '#00565c' }}
+              style={{ borderColor: accentColor, color: accentColor }}
             >
               Next
             </button>
