@@ -137,16 +137,30 @@ const FrontPage: React.FC = () => {
                             </ul>
                         </div>
 
-                        {/* Register Button */}
-                        <button
-                            onClick={handleRegisterClick}
-                            className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-[#00565c] rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-[#004348] w-full sm:w-auto"
-                        >
-                            <span className="relative z-10 flex items-center gap-2">
-                                Register Now
-                                <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                            </span>
-                        </button>
+                        {/* Button */}
+                        <div className='flex gap-3 flex-col w-auto'>
+                            <button
+                                onClick={handleRegisterClick}
+                                className="group relative inline-flex items-center justify-center px-6 py-3 text-lg font-semibold text-white bg-[#00565c] rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-[#004348] w-full sm:w-auto"
+                            >
+                                <span className="relative z-10 flex items-center gap-2">
+                                    Register Now
+                                    <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                </span>
+                            </button>
+                            <button
+                                onClick={() => {
+                                    navigate('/public-alumni-portal')
+                                }}
+                                className="group relative inline-flex items-center justify-center px-8 py-3 text-lg font-semibold text-white bg-[#00565c] rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-[#004348] w-full sm:w-auto"
+                            >
+                                <span className="relative z-10 flex items-center gap-2">
+                                    Visit without Registration
+                                    <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                </span>
+                            </button>
+                        </div>
+
 
                         {/* Additional Links */}
                         <p className="mt-6 text-sm text-gray-500">
