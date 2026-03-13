@@ -55,7 +55,7 @@ const EditModal: React.FC<EditModalProps> = ({ alumni, isOpen, onClose, onSave }
       <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="px-6 py-4 border-b flex justify-between items-center" style={{ backgroundColor: '#ba9629' }}>
           <h3 className="text-xl font-semibold text-white">Edit Alumni Details</h3>
-          <button onClick={onClose} className="text-white hover:text-gray-200">
+          <button onClick={onClose} className="text-white hover:text-gray-200 cursor-pointer">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -170,14 +170,14 @@ const EditModal: React.FC<EditModalProps> = ({ alumni, isOpen, onClose, onSave }
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+              className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="px-4 py-2 text-white rounded-lg transition-colors disabled:opacity-50 hover:opacity-90"
+              className="px-4 py-2 text-white rounded-lg transition-colors disabled:opacity-50 hover:opacity-90 cursor-pointer"
               style={{ backgroundColor: '#ba9629' }}
             >
               {loading ? 'Saving...' : 'Save Changes'}
@@ -440,7 +440,7 @@ const Alumni: React.FC = () => {
               <select
                 value={selectedYear}
                 onChange={handleYearChange}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-md focus:outline-none transition-all duration-200 bg-white"
+                className="w-full px-4 py-3 border-2 cursor-pointer  border-gray-200 rounded-md focus:outline-none transition-all duration-200 bg-white"
                 style={{ borderColor: '#e5e7eb' }}
                 onFocus={(e) => e.target.style.borderColor = accentColor}
                 onBlur={(e) => e.target.style.borderColor = '#e5e7eb'}
@@ -461,7 +461,7 @@ const Alumni: React.FC = () => {
             <div className="flex gap-2">
               <button
                 onClick={downloadCSV}
-                className="px-4 py-3 rounded-md text-white transition-all duration-200 hover:shadow-md flex items-center gap-2"
+                className="px-4 py-3 rounded-md text-white transition-all duration-200 hover:shadow-md flex items-center gap-2 cursor-pointer"
                 style={{ backgroundColor: accentColor }}
                 title="Download as CSV"
               >
@@ -472,7 +472,7 @@ const Alumni: React.FC = () => {
               </button>
               <button
                 onClick={downloadExcel}
-                className="px-4 py-3 rounded-md text-white transition-all duration-200 hover:shadow-md flex items-center gap-2"
+                className="px-4 py-3 rounded-md text-white transition-all duration-200 hover:shadow-md flex items-center gap-2 cursor-pointer"
                 style={{ backgroundColor: accentColor }}
                 title="Download as Excel"
               >
@@ -512,7 +512,7 @@ const Alumni: React.FC = () => {
                 <div className="flex space-x-2">
                   <button
                     onClick={() => handleEdit(a)}
-                    className="p-1.5 rounded-lg bg-black bg-opacity-20 hover:bg-opacity-30 transition-all"
+                    className="p-1.5 rounded-lg bg-black bg-opacity-20 hover:bg-opacity-30 transition-all cursor-pointer"
                     title="Edit"
                   >
                     <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -521,7 +521,7 @@ const Alumni: React.FC = () => {
                   </button>
                   <button
                     onClick={() => handleDeleteClick(a)}
-                    className="p-1.5 rounded-lg bg-red-700 bg-opacity-20 hover:bg-opacity-30 transition-all"
+                    className="p-1.5 rounded-lg bg-red-700 bg-opacity-20 hover:bg-opacity-30 transition-all cursor-pointer"
                     title="Delete"
                   >
                     <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -588,7 +588,7 @@ const Alumni: React.FC = () => {
             <button
               onClick={() => paginate(currentPage - 1)}
               disabled={currentPage === 1}
-              className="px-4 py-2 rounded-lg border disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md"
+              className="px-4 py-2 rounded-lg border disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md cursor-pointer"
               style={{ borderColor: accentColor, color: accentColor }}
             >
               Previous
@@ -606,9 +606,9 @@ const Alumni: React.FC = () => {
                     <button
                       key={pageNumber}
                       onClick={() => paginate(pageNumber)}
-                      className={`w-10 h-10 rounded-lg transition-all duration-200 ${currentPage === pageNumber
-                          ? 'text-white'
-                          : 'hover:bg-gray-100'
+                      className={`w-10 h-10 rounded-lg transition-all duration-200 cursor-pointer ${currentPage === pageNumber
+                        ? 'text-white'
+                        : 'hover:bg-gray-100'
                         }`}
                       style={currentPage === pageNumber ? { backgroundColor: accentColor } : {}}
                     >
@@ -628,7 +628,7 @@ const Alumni: React.FC = () => {
             <button
               onClick={() => paginate(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="px-4 py-2 rounded-lg border disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md"
+              className="px-4 py-2 rounded-lg border disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md cursor-pointer"
               style={{ borderColor: accentColor, color: accentColor }}
             >
               Next
@@ -673,13 +673,13 @@ const Alumni: React.FC = () => {
                     setShowDeleteConfirm(false);
                     setDeletingAlumni(null);
                   }}
-                  className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+                  className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={confirmDelete}
-                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors cursor-pointer"
                 >
                   Delete
                 </button>

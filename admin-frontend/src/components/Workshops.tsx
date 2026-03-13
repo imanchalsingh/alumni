@@ -158,7 +158,7 @@ export default function Workshop() {
                     </div>
                     <button
                         onClick={() => window.history.back()}
-                        className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-[#ba9629] transition-colors"
+                        className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-[#ba9629] transition-colors cursor-pointer"
                     >
                         <ArrowLeft className="w-4 h-4" />
                         Back
@@ -216,7 +216,7 @@ export default function Workshop() {
                 </div>
 
                 {/* Main Form Card */}
-                <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+                <div className="bg-white rounded-md shadow-md overflow-hidden">
                     {/* Form Header with Yellow Gradient */}
                     <div
                         className="px-8 py-5"
@@ -699,7 +699,7 @@ export default function Workshop() {
                                     <button
                                         type="button"
                                         onClick={nextStep}
-                                        className="ml-auto px-6 py-2.5 text-white rounded-lg transition-colors font-medium"
+                                        className="ml-auto px-6 py-2.5 text-white rounded-lg transition-colors font-medium cursor-pointer" 
                                         style={{
                                             background: `linear-gradient(135deg, ${accentColor} 0%, #8b701f 100%)`,
                                         }}

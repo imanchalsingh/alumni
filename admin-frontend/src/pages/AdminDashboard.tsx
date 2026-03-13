@@ -43,7 +43,7 @@ const AdminDashboard: React.FC = () => {
                 return <Alumni />;
             case 'workshops':
                 return <Workshop />;
-              case 'about':
+            case 'about':
                 return <About />;
             default:
                 return <Alumni />;
@@ -114,7 +114,7 @@ const AdminDashboard: React.FC = () => {
                                                 setSidebarOpen(false);
                                             }}
                                             className={`
-                        w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200
+                        w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 cursor-pointer
                         ${activeTab === item.id
                                                     ? 'text-white'
                                                     : 'text-gray-600 hover:bg-gray-100'
@@ -142,7 +142,7 @@ const AdminDashboard: React.FC = () => {
                                 localStorage.removeItem('adminToken');
                                 sessionStorage.removeItem('adminToken');
                             }}
-                            className="w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors"
+                            className="w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors cursor-pointer"
                             style={{ color: '#dc2626' }}
                             onMouseEnter={(e) => {
                                 e.currentTarget.style.backgroundColor = '#fee2e2';
