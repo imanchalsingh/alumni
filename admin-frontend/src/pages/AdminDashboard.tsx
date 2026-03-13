@@ -6,10 +6,12 @@ import {
     LogOut,
     BookOpen,
     ChevronRight,
+    DockIcon,
 } from 'lucide-react'
 import Alumni from '../components/Alumni'
 import Workshop from '../components/Workshops';
 import { useNavigate } from 'react-router-dom';
+import About from '../components/About';
 
 interface Workshop {
     id: number;
@@ -32,6 +34,7 @@ const AdminDashboard: React.FC = () => {
     const navItems = [
         { id: 'alumni', label: 'Alumni Meets', icon: GraduationCap },
         { id: 'workshops', label: 'Workshops', icon: BookOpen },
+        { id: 'about', label: 'About', icon: DockIcon }
     ];
 
     const renderContent = () => {
@@ -40,6 +43,8 @@ const AdminDashboard: React.FC = () => {
                 return <Alumni />;
             case 'workshops':
                 return <Workshop />;
+              case 'about':
+                return <About />;
             default:
                 return <Alumni />;
         }
