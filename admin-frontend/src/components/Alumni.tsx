@@ -413,7 +413,7 @@ const Alumni: React.FC = () => {
         </div>
 
         {/* Search and Filter Bar */}
-        <div className="bg-white rounded-xl shadow-sm p-4 mb-6">
+        <div className="p-4 mb-6">
           <div className="flex flex-col sm:flex-row gap-4">
             {/* Search Input */}
             <div className="flex-1 relative">
@@ -425,7 +425,7 @@ const Alumni: React.FC = () => {
                   setSearch(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none transition-all duration-200"
+                className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-md focus:outline-none transition-all duration-200"
                 style={{ borderColor: '#e5e7eb' }}
                 onFocus={(e) => e.target.style.borderColor = accentColor}
                 onBlur={(e) => e.target.style.borderColor = '#e5e7eb'}
@@ -440,7 +440,7 @@ const Alumni: React.FC = () => {
               <select
                 value={selectedYear}
                 onChange={handleYearChange}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none transition-all duration-200 bg-white"
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-md focus:outline-none transition-all duration-200 bg-white"
                 style={{ borderColor: '#e5e7eb' }}
                 onFocus={(e) => e.target.style.borderColor = accentColor}
                 onBlur={(e) => e.target.style.borderColor = '#e5e7eb'}
@@ -461,7 +461,7 @@ const Alumni: React.FC = () => {
             <div className="flex gap-2">
               <button
                 onClick={downloadCSV}
-                className="px-4 py-3 rounded-xl text-white transition-all duration-200 hover:shadow-md flex items-center gap-2"
+                className="px-4 py-3 rounded-md text-white transition-all duration-200 hover:shadow-md flex items-center gap-2"
                 style={{ backgroundColor: accentColor }}
                 title="Download as CSV"
               >
@@ -472,7 +472,7 @@ const Alumni: React.FC = () => {
               </button>
               <button
                 onClick={downloadExcel}
-                className="px-4 py-3 rounded-xl text-white transition-all duration-200 hover:shadow-md flex items-center gap-2"
+                className="px-4 py-3 rounded-md text-white transition-all duration-200 hover:shadow-md flex items-center gap-2"
                 style={{ backgroundColor: accentColor }}
                 title="Download as Excel"
               >
@@ -500,7 +500,7 @@ const Alumni: React.FC = () => {
           {currentItems.map((a) => (
             <div
               key={a._id}
-              className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+              className="bg-white rounded-sm shadow-sm overflow-hidden hover:shadow-md transition-all duration-300 transform "
             >
               <div className="px-4 py-3 flex justify-between items-start" style={{ background: accentGradient }}>
                 <div>
@@ -606,11 +606,10 @@ const Alumni: React.FC = () => {
                     <button
                       key={pageNumber}
                       onClick={() => paginate(pageNumber)}
-                      className={`w-10 h-10 rounded-lg transition-all duration-200 ${
-                        currentPage === pageNumber
+                      className={`w-10 h-10 rounded-lg transition-all duration-200 ${currentPage === pageNumber
                           ? 'text-white'
                           : 'hover:bg-gray-100'
-                      }`}
+                        }`}
                       style={currentPage === pageNumber ? { backgroundColor: accentColor } : {}}
                     >
                       {pageNumber}
