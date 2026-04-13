@@ -387,7 +387,7 @@ const Alumni: React.FC = () => {
 
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen">
       <div className="py-6 px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-6">
