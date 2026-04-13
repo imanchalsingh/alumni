@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "../api/axios";
-import { Calendar, MapPin, Video, Users, Clock, User, Building, ExternalLink, Filter, Search, X, Tag, ChevronRight, Download } from 'lucide-react';
+import { Calendar, MapPin, Video, Users, Clock, User, Building, Filter, Search, X, Tag } from 'lucide-react';
 
 interface Workshop {
   _id: string;
@@ -40,7 +40,6 @@ export default function Workshops() {
   const [selectedWorkshop, setSelectedWorkshop] = useState<Workshop | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
 
-  // Get unique categories
   const categories = ["all", ...new Set(workshops.map(w => w.category))];
   const modes = ["all", "online", "offline", "hybrid"];
 
@@ -70,9 +69,8 @@ export default function Workshops() {
   const filterWorkshops = () => {
     let filtered = workshops;
 
-    // Apply search filter
     if (searchTerm) {
-      filtered = filtered.filter(w => 
+      filtered = filtered.filter(w =>
         w.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         w.speaker.toLowerCase().includes(searchTerm.toLowerCase()) ||
         w.organization.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -80,12 +78,10 @@ export default function Workshops() {
       );
     }
 
-    // Apply category filter
     if (selectedCategory !== "all") {
       filtered = filtered.filter(w => w.category === selectedCategory);
     }
 
-    // Apply mode filter
     if (selectedMode !== "all") {
       filtered = filtered.filter(w => w.mode === selectedMode);
     }
@@ -111,7 +107,6 @@ export default function Workshops() {
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
-      weekday: 'short',
       year: 'numeric',
       month: 'short',
       day: 'numeric'
@@ -119,7 +114,7 @@ export default function Workshops() {
   };
 
   const getModeColor = (mode: string) => {
-    switch(mode) {
+    switch (mode) {
       case 'online': return 'bg-blue-100 text-blue-700';
       case 'offline': return 'bg-green-100 text-green-700';
       case 'hybrid': return 'bg-purple-100 text-purple-700';
@@ -128,20 +123,20 @@ export default function Workshops() {
   };
 
   const getModeIcon = (mode: string) => {
-    switch(mode) {
-      case 'online': return <Video className="w-4 h-4" />;
-      case 'offline': return <MapPin className="w-4 h-4" />;
-      case 'hybrid': return <Users className="w-4 h-4" />;
+    switch (mode) {
+      case 'online': return <Video className="w-3.5 h-3.5" />;
+      case 'offline': return <MapPin className="w-3.5 h-3.5" />;
+      case 'hybrid': return <Users className="w-3.5 h-3.5" />;
       default: return null;
     }
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#00565c] mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading workshops...</p>
+          <div className="w-10 h-10 border-2 border-[#00565c]/20 border-t-[#00565c] rounded-full animate-spin mx-auto"></div>
+          <p className="mt-3 text-gray-600 text-sm">Loading workshops...</p>
         </div>
       </div>
     );
@@ -149,13 +144,13 @@ export default function Workshops() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center bg-white p-8 rounded-2xl shadow-xl">
-          <div className="text-red-500 text-5xl mb-4">⚠️</div>
-          <p className="text-gray-800 text-lg mb-4">{error}</p>
-          <button 
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+        <div className="text-center bg-white rounded-lg shadow-md p-6 max-w-md">
+          <div className="text-red-500 text-3xl mb-3">⚠️</div>
+          <p className="text-gray-800 mb-4 text-sm">{error}</p>
+          <button
             onClick={fetchWorkshops}
-            className="px-6 py-2 bg-[#00565c] text-white rounded-lg hover:bg-[#004348] transition-colors"
+            className="px-4 py-2 bg-[#00565c] text-white rounded hover:bg-[#004348] text-sm"
           >
             Try Again
           </button>
@@ -165,33 +160,33 @@ export default function Workshops() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-100 py-6 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Workshops & Events</h1>
-          <p className="text-gray-600 mt-2">Discover and join upcoming workshops, seminars, and webinars</p>
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-gray-800">Workshops & Events</h1>
+          <p className="text-gray-600 text-sm mt-1">Discover and join upcoming workshops, seminars, and webinars</p>
         </div>
 
         {/* Search and Filter Bar */}
-        <div className="bg-white rounded-2xl shadow-sm p-4 mb-8">
-          <div className="flex flex-col lg:flex-row gap-4">
+        <div className="bg-white rounded-lg shadow-sm p-4 mb-6">
+          <div className="flex flex-col lg:flex-row gap-3">
             {/* Search */}
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <input
                 type="text"
                 placeholder="Search by title, speaker, organization..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#00565c]/20 focus:border-[#00565c] transition-all"
+                className="w-full pl-9 pr-8 py-2 border border-gray-300 rounded focus:outline-none focus:border-[#00565c] text-sm"
               />
               {searchTerm && (
                 <button
                   onClick={() => setSearchTerm("")}
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-3.5 h-3.5" />
                 </button>
               )}
             </div>
@@ -199,9 +194,9 @@ export default function Workshops() {
             {/* Filter Toggle Button */}
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className="lg:hidden px-4 py-3 border border-gray-200 rounded-xl flex items-center justify-center gap-2 hover:bg-gray-50 transition-colors"
+              className="lg:hidden px-3 py-2 border border-gray-300 rounded flex items-center justify-center gap-2 hover:bg-gray-50 text-sm"
             >
-              <Filter className="w-5 h-5" />
+              <Filter className="w-4 h-4" />
               Filters
             </button>
 
@@ -210,7 +205,7 @@ export default function Workshops() {
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#00565c]/20 focus:border-[#00565c] bg-white"
+                className="px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-[#00565c] bg-white text-sm"
               >
                 {categories.map(cat => (
                   <option key={cat} value={cat}>
@@ -222,7 +217,7 @@ export default function Workshops() {
               <select
                 value={selectedMode}
                 onChange={(e) => setSelectedMode(e.target.value)}
-                className="px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#00565c]/20 focus:border-[#00565c] bg-white"
+                className="px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-[#00565c] bg-white text-sm"
               >
                 {modes.map(mode => (
                   <option key={mode} value={mode}>
@@ -234,9 +229,8 @@ export default function Workshops() {
               {(searchTerm || selectedCategory !== "all" || selectedMode !== "all") && (
                 <button
                   onClick={clearFilters}
-                  className="px-4 py-3 text-[#00565c] hover:bg-[#00565c]/10 rounded-xl transition-colors flex items-center gap-2"
+                  className="px-3 py-2 text-[#00565c] hover:bg-[#00565c]/10 rounded text-sm"
                 >
-                  <X className="w-4 h-4" />
                   Clear Filters
                 </button>
               )}
@@ -245,11 +239,11 @@ export default function Workshops() {
 
           {/* Mobile Filters */}
           {showFilters && (
-            <div className="lg:hidden mt-4 space-y-3 pt-4 border-t border-gray-200">
+            <div className="lg:hidden mt-3 space-y-2 pt-3 border-t border-gray-200">
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#00565c]/20 focus:border-[#00565c] bg-white"
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-[#00565c] bg-white text-sm"
               >
                 {categories.map(cat => (
                   <option key={cat} value={cat}>
@@ -261,7 +255,7 @@ export default function Workshops() {
               <select
                 value={selectedMode}
                 onChange={(e) => setSelectedMode(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#00565c]/20 focus:border-[#00565c] bg-white"
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-[#00565c] bg-white text-sm"
               >
                 {modes.map(mode => (
                   <option key={mode} value={mode}>
@@ -273,7 +267,7 @@ export default function Workshops() {
               {(searchTerm || selectedCategory !== "all" || selectedMode !== "all") && (
                 <button
                   onClick={clearFilters}
-                  className="w-full px-4 py-3 text-[#00565c] border border-[#00565c] rounded-xl hover:bg-[#00565c]/10 transition-colors"
+                  className="w-full px-3 py-2 text-[#00565c] border border-[#00565c] rounded hover:bg-[#00565c]/10 text-sm"
                 >
                   Clear All Filters
                 </button>
@@ -283,57 +277,53 @@ export default function Workshops() {
         </div>
 
         {/* Results Stats */}
-        <div className="mb-6 flex justify-between items-center">
+        <div className="mb-4 flex justify-between items-center text-sm">
           <p className="text-gray-600">
             Showing <span className="font-semibold text-[#00565c]">{filteredWorkshops.length}</span> workshops
           </p>
-          <button className="px-4 py-2 text-[#00565c] hover:bg-[#00565c]/10 rounded-lg transition-colors flex items-center gap-2 text-sm">
-            <Download className="w-4 h-4" />
-            Export List
-          </button>
         </div>
 
         {/* Workshops Grid */}
         {filteredWorkshops.length === 0 ? (
-          <div className="bg-white rounded-2xl shadow-sm p-12 text-center">
-            <div className="text-6xl mb-4">🔍</div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">No workshops found</h3>
-            <p className="text-gray-600 mb-6">Try adjusting your search or filters</p>
+          <div className="bg-white rounded-lg shadow-sm p-8 text-center">
+            <div className="text-4xl mb-3">🔍</div>
+            <h3 className="text-lg font-semibold text-gray-800 mb-1">No workshops found</h3>
+            <p className="text-gray-600 text-sm mb-4">Try adjusting your search or filters</p>
             <button
               onClick={clearFilters}
-              className="px-6 py-2 bg-[#00565c] text-white rounded-lg hover:bg-[#004348] transition-colors"
+              className="px-4 py-2 bg-[#00565c] text-white rounded hover:bg-[#004348] text-sm"
             >
               Clear Filters
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {filteredWorkshops.map((workshop) => (
               <div
                 key={workshop._id}
-                className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 group"
+                className="bg-white rounded-lg shadow-sm overflow-hidden"
               >
                 {/* Image Container */}
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative h-40 overflow-hidden bg-gray-200">
                   <img
                     src={workshop.coverImage || 'https://via.placeholder.com/800x400?text=Workshop'}
                     alt={workshop.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    className="w-full h-full object-cover"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = 'https://via.placeholder.com/800x400?text=Workshop';
                     }}
                   />
-                  
+
                   {/* Category Badge */}
-                  <div className="absolute top-3 left-3">
-                    <span className="px-3 py-1 bg-black/50 backdrop-blur-sm text-white text-xs font-medium rounded-full">
+                  <div className="absolute top-2 left-2">
+                    <span className="px-2 py-0.5 bg-black/60 text-white text-xs rounded">
                       {workshop.category}
                     </span>
                   </div>
 
                   {/* Mode Badge */}
-                  <div className="absolute top-3 right-3">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1 ${getModeColor(workshop.mode)}`}>
+                  <div className="absolute top-2 right-2">
+                    <span className={`px-2 py-0.5 rounded text-xs flex items-center gap-1 ${getModeColor(workshop.mode)}`}>
                       {getModeIcon(workshop.mode)}
                       {workshop.mode.charAt(0).toUpperCase() + workshop.mode.slice(1)}
                     </span>
@@ -341,8 +331,8 @@ export default function Workshops() {
                 </div>
 
                 {/* Content */}
-                <div className="p-5">
-                  <h3 className="font-bold text-lg text-gray-900 mb-2 line-clamp-1">
+                <div className="p-4">
+                  <h3 className="font-semibold text-gray-800 mb-1 line-clamp-1 text-base">
                     {workshop.title}
                   </h3>
 
@@ -351,48 +341,52 @@ export default function Workshops() {
                   </p>
 
                   {/* Speaker & Organization */}
-                  <div className="space-y-2 mb-4">
-                    <div className="flex items-center gap-2 text-sm text-gray-600">
-                      <User className="w-4 h-4 text-gray-400" />
-                      <span className="font-medium">{workshop.speaker}</span>
+                  <div className="space-y-1 mb-3">
+                    <div className="flex items-center gap-1.5 text-sm text-gray-600">
+                      <User className="w-3.5 h-3.5 text-gray-400" />
+                      <span className="text-xs">{workshop.speaker}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-gray-600">
-                      <Building className="w-4 h-4 text-gray-400" />
-                      <span>{workshop.organization}</span>
+                    <div className="flex items-center gap-1.5 text-sm text-gray-600">
+                      <Building className="w-3.5 h-3.5 text-gray-400" />
+                      <span className="text-xs">{workshop.organization}</span>
                     </div>
                   </div>
 
                   {/* Date & Time */}
-                  <div className="flex items-center gap-2 text-sm text-gray-600 mb-4">
-                    <Calendar className="w-4 h-4 text-gray-400" />
+                  <div className="flex items-center gap-1.5 text-xs text-gray-600 mb-3">
+                    <Calendar className="w-3.5 h-3.5 text-gray-400" />
                     <span>{formatDate(workshop.date)}</span>
-                    <Clock className="w-4 h-4 text-gray-400 ml-2" />
+                    <Clock className="w-3.5 h-3.5 text-gray-400 ml-1" />
                     <span>{workshop.startTime}</span>
                   </div>
 
                   {/* Tags */}
                   {workshop.tags && (
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {workshop.tags.split(',').map((tag, index) => (
+                    <div className="flex flex-wrap gap-1.5 mb-3">
+                      {workshop.tags.split(',').slice(0, 2).map((tag, index) => (
                         <span
                           key={index}
-                          className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full flex items-center gap-1"
+                          className="px-1.5 py-0.5 bg-gray-100 text-gray-600 text-xs rounded flex items-center gap-0.5"
                         >
-                          <Tag className="w-3 h-3" />
+                          <Tag className="w-2.5 h-2.5" />
                           {tag.trim()}
                         </span>
                       ))}
+                      {workshop.tags.split(',').length > 2 && (
+                        <span className="px-1.5 py-0.5 bg-gray-100 text-gray-600 text-xs rounded">
+                          +{workshop.tags.split(',').length - 2}
+                        </span>
+                      )}
                     </div>
                   )}
 
                   {/* Action Buttons */}
-                  <div className="flex gap-2 mt-4">
+                  <div className="flex gap-2 mt-3">
                     <button
                       onClick={() => handleViewDetails(workshop)}
-                      className="flex-1 px-4 py-2 bg-[#00565c] text-white rounded-lg hover:bg-[#004348] transition-colors text-sm font-medium flex items-center justify-center gap-2"
+                      className="flex-1 px-3 py-1.5 bg-[#00565c] text-white rounded hover:bg-[#004348] text-xs font-medium"
                     >
                       View Details
-                      <ChevronRight className="w-4 h-4" />
                     </button>
 
                     {workshop.mode !== 'offline' && workshop.meetingLink && (
@@ -400,9 +394,8 @@ export default function Workshops() {
                         href={workshop.meetingLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-4 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium flex items-center justify-center gap-2"
+                        className="px-3 py-1.5 border border-gray-300 rounded hover:bg-gray-50 text-xs"
                       >
-                        <ExternalLink className="w-4 h-4" />
                         Join
                       </a>
                     )}
@@ -416,9 +409,9 @@ export default function Workshops() {
         {/* Workshop Details Modal */}
         {showModal && selectedWorkshop && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="bg-white rounded-lg shadow-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
               {/* Modal Header */}
-              <div className="relative h-64">
+              <div className="relative h-48">
                 <img
                   src={selectedWorkshop.coverImage || 'https://via.placeholder.com/1200x400?text=Workshop'}
                   alt={selectedWorkshop.title}
@@ -426,17 +419,17 @@ export default function Workshops() {
                 />
                 <button
                   onClick={closeModal}
-                  className="absolute top-4 right-4 p-2 bg-black/50 backdrop-blur-sm text-white rounded-lg hover:bg-black/70 transition-colors"
+                  className="absolute top-3 right-3 p-1.5 bg-black/50 text-white rounded hover:bg-black/70"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-4 h-4" />
                 </button>
-                
+
                 {/* Badges */}
-                <div className="absolute bottom-4 left-4 flex gap-2">
-                  <span className="px-3 py-1 bg-[#00565c] text-white text-sm font-medium rounded-full">
+                <div className="absolute bottom-3 left-3 flex gap-2">
+                  <span className="px-2 py-0.5 bg-[#00565c] text-white text-xs rounded">
                     {selectedWorkshop.category}
                   </span>
-                  <span className={`px-3 py-1 rounded-full text-sm font-medium flex items-center gap-1 ${getModeColor(selectedWorkshop.mode)}`}>
+                  <span className={`px-2 py-0.5 rounded text-xs flex items-center gap-1 ${getModeColor(selectedWorkshop.mode)}`}>
                     {getModeIcon(selectedWorkshop.mode)}
                     {selectedWorkshop.mode.charAt(0).toUpperCase() + selectedWorkshop.mode.slice(1)}
                   </span>
@@ -444,61 +437,61 @@ export default function Workshops() {
               </div>
 
               {/* Modal Content */}
-              <div className="p-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">{selectedWorkshop.title}</h2>
-                
-                <div className="grid grid-cols-2 gap-4 mb-6">
-                  <div className="flex items-center gap-2 text-gray-600">
-                    <User className="w-4 h-4" />
+              <div className="p-5">
+                <h2 className="text-xl font-bold text-gray-800 mb-3">{selectedWorkshop.title}</h2>
+
+                <div className="grid grid-cols-2 gap-3 mb-5 text-sm">
+                  <div className="flex items-center gap-1.5 text-gray-600">
+                    <User className="w-3.5 h-3.5" />
                     <span className="font-medium">Speaker:</span> {selectedWorkshop.speaker}
                   </div>
-                  <div className="flex items-center gap-2 text-gray-600">
-                    <Building className="w-4 h-4" />
+                  <div className="flex items-center gap-1.5 text-gray-600">
+                    <Building className="w-3.5 h-3.5" />
                     <span className="font-medium">Organization:</span> {selectedWorkshop.organization}
                   </div>
-                  <div className="flex items-center gap-2 text-gray-600">
-                    <Calendar className="w-4 h-4" />
+                  <div className="flex items-center gap-1.5 text-gray-600">
+                    <Calendar className="w-3.5 h-3.5" />
                     <span className="font-medium">Date:</span> {formatDate(selectedWorkshop.date)}
                   </div>
-                  <div className="flex items-center gap-2 text-gray-600">
-                    <Clock className="w-4 h-4" />
+                  <div className="flex items-center gap-1.5 text-gray-600">
+                    <Clock className="w-3.5 h-3.5" />
                     <span className="font-medium">Time:</span> {selectedWorkshop.startTime} - {selectedWorkshop.endTime}
                   </div>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-3 text-sm">
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">About this Workshop</h3>
+                    <h3 className="font-semibold text-gray-800 mb-1">About this Workshop</h3>
                     <p className="text-gray-600">{selectedWorkshop.description}</p>
                   </div>
 
                   {selectedWorkshop.prerequisites && (
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-2">Prerequisites</h3>
+                      <h3 className="font-semibold text-gray-800 mb-1">Prerequisites</h3>
                       <p className="text-gray-600">{selectedWorkshop.prerequisites}</p>
                     </div>
                   )}
 
                   {selectedWorkshop.targetAudience && (
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-2">Target Audience</h3>
+                      <h3 className="font-semibold text-gray-800 mb-1">Target Audience</h3>
                       <p className="text-gray-600">{selectedWorkshop.targetAudience}</p>
                     </div>
                   )}
 
                   {selectedWorkshop.mode !== 'online' && selectedWorkshop.venue && (
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-2">Venue</h3>
-                      <p className="text-gray-600 flex items-center gap-2">
-                        <MapPin className="w-4 h-4" />
+                      <h3 className="font-semibold text-gray-800 mb-1">Venue</h3>
+                      <p className="text-gray-600 flex items-center gap-1.5">
+                        <MapPin className="w-3.5 h-3.5" />
                         {selectedWorkshop.venue}
                       </p>
                     </div>
                   )}
 
-                  <div className="border-t border-gray-200 pt-4">
-                    <h3 className="font-semibold text-gray-900 mb-3">Contact Information</h3>
-                    <div className="grid grid-cols-2 gap-3 text-sm">
+                  <div className="border-t border-gray-200 pt-3">
+                    <h3 className="font-semibold text-gray-800 mb-2">Contact Information</h3>
+                    <div className="grid grid-cols-2 gap-2 text-sm">
                       <p className="text-gray-600">
                         <span className="font-medium">Name:</span> {selectedWorkshop.contactName}
                       </p>
@@ -514,10 +507,10 @@ export default function Workshops() {
                   </div>
 
                   {selectedWorkshop.registrationRequired && (
-                    <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                      <p className="text-yellow-800 font-medium">Registration Required</p>
+                    <div className="bg-yellow-50 border border-yellow-200 rounded p-3">
+                      <p className="text-yellow-800 text-sm font-medium">Registration Required</p>
                       {selectedWorkshop.maxParticipants && (
-                        <p className="text-yellow-600 text-sm mt-1">
+                        <p className="text-yellow-600 text-xs mt-0.5">
                           Maximum participants: {selectedWorkshop.maxParticipants}
                         </p>
                       )}
@@ -526,10 +519,10 @@ export default function Workshops() {
                 </div>
 
                 {/* Modal Footer */}
-                <div className="mt-6 pt-4 border-t border-gray-200 flex justify-end gap-3">
+                <div className="mt-5 pt-3 border-t border-gray-200 flex justify-end gap-2">
                   <button
                     onClick={closeModal}
-                    className="px-4 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                    className="px-3 py-1.5 border border-gray-300 rounded hover:bg-gray-50 text-sm"
                   >
                     Close
                   </button>
@@ -538,9 +531,9 @@ export default function Workshops() {
                       href={selectedWorkshop.meetingLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-4 py-2 bg-[#00565c] text-white rounded-lg hover:bg-[#004348] transition-colors flex items-center gap-2"
+                      className="px-3 py-1.5 bg-[#00565c] text-white rounded hover:bg-[#004348] text-sm flex items-center gap-1"
                     >
-                      <Video className="w-4 h-4" />
+                      <Video className="w-3.5 h-3.5" />
                       Join Workshop
                     </a>
                   )}

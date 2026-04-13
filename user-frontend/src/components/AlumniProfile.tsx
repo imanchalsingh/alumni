@@ -25,7 +25,6 @@ const AlumniProfile: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if user is logged in
     const token = localStorage.getItem('alumniToken');
     if (!token) {
       navigate('/');
@@ -90,74 +89,89 @@ const AlumniProfile: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2" style={{ borderColor: '#00565c' }}></div>
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-[#00565c] border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+        <div className="bg-white rounded-lg shadow-md p-6 text-center">
+          <p className="text-red-600 mb-4">{error}</p>
+          <button
+            onClick={fetchProfile}
+            className="px-4 py-2 bg-[#00565c] text-white rounded hover:bg-[#004348] text-sm"
+          >
+            Try Again
+          </button>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-100 py-6 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold" style={{ color: '#00565c' }}>My Alumni Profile</h1>
+          <h1 className="text-2xl font-bold text-gray-800">My Profile</h1>
           <button
             onClick={handleLogout}
-            className="px-4 py-2 rounded-lg text-white transition-colors"
-            style={{ backgroundColor: '#5c002c' }}
+            className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 text-sm"
           >
             Logout
           </button>
         </div>
 
         {/* Profile Card */}
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div className="bg-white rounded-lg shadow-md overflow-hidden">
           {/* Profile Header */}
-          <div className="px-8 py-6" style={{ background: 'linear-gradient(135deg, #00565c 0%, #003d42 100%)' }}>
-            <div className="flex items-center space-x-4">
-              <div className="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center">
-                <span className="text-3xl text-white">
+          <div className="bg-[#00565c] px-6 py-5">
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center">
+                <span className="text-2xl text-white font-semibold">
                   {profile?.name?.charAt(0).toUpperCase()}
                 </span>
               </div>
               <div className="flex-1">
-                <h2 className="text-2xl font-semibold text-white">{profile?.name}</h2>
-                <p className="text-blue-100">Batch of {profile?.batch_year}</p>
-                <p className="text-blue-100 text-sm mt-1">Member since: {new Date(profile?.createdAt || '').toLocaleDateString()}</p>
+                <h2 className="text-xl font-semibold text-white">{profile?.name}</h2>
+                <p className="text-white/80 text-sm">Batch of {profile?.batch_year}</p>
+                {profile?.createdAt && (
+                  <p className="text-white/60 text-xs mt-1">
+                    Member since: {new Date(profile.createdAt).toLocaleDateString()}
+                  </p>
+                )}
               </div>
               {!isEditing && (
                 <button
                   onClick={() => setIsEditing(true)}
-                  className="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg text-white transition-colors"
+                  className="px-3 py-1.5 bg-white/20 hover:bg-white/30 rounded text-white text-sm transition-colors"
                 >
-                  Edit Profile
+                  Edit
                 </button>
               )}
             </div>
           </div>
 
           {/* Profile Body */}
-          <div className="p-8">
+          <div className="p-6">
             {!isEditing ? (
-              // View Mode
-              <div className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <InfoField label="Father's Name" value={profile?.father_name} />
-                  <InfoField label="Course" value={profile?.course || 'BCA'} />
-                  <InfoField label="Mobile Number" value={profile?.mobile_number} />
-                  <InfoField label="Email" value={profile?.email} />
-                  <InfoField label="Designation" value={profile?.designation} />
-                  <InfoField label="Organization" value={profile?.organization} />
-                  <div className="md:col-span-2">
-                    <InfoField label="Address" value={profile?.address} />
-                  </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <InfoField label="Father's Name" value={profile?.father_name} />
+                <InfoField label="Course" value={profile?.course || 'BCA'} />
+                <InfoField label="Mobile Number" value={profile?.mobile_number} />
+                <InfoField label="Email" value={profile?.email} />
+                <InfoField label="Designation" value={profile?.designation} />
+                <InfoField label="Organization" value={profile?.organization} />
+                <div className="md:col-span-2">
+                  <InfoField label="Address" value={profile?.address} />
                 </div>
               </div>
             ) : (
-              // Edit Mode
-              <form onSubmit={handleUpdate} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <form onSubmit={handleUpdate}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <EditField
                     label="Name"
                     name="name"
@@ -195,24 +209,21 @@ const AlumniProfile: React.FC = () => {
                       value={editForm.address || ''}
                       onChange={(e) => setEditForm({ ...editForm, address: e.target.value })}
                       rows={3}
-                      className="w-full px-4 py-2 border-2 border-gray-200 rounded-xl focus:outline-none"
-                      onFocus={(e) => e.target.style.borderColor = '#ba9629'}
-                      onBlur={(e) => e.target.style.borderColor = '#e5e7eb'}
+                      className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-[#00565c] text-sm"
                     />
                   </div>
                 </div>
-                <div className="flex justify-end space-x-4">
+                <div className="flex justify-end gap-3 mt-6 pt-4 border-t">
                   <button
                     type="button"
                     onClick={() => setIsEditing(false)}
-                    className="px-6 py-2 border-2 border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                    className="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50 text-sm"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="px-6 py-2 text-white rounded-lg transition-colors"
-                    style={{ backgroundColor: '#00565c' }}
+                    className="px-4 py-2 bg-[#00565c] text-white rounded hover:bg-[#004348] text-sm"
                   >
                     Save Changes
                   </button>
@@ -226,11 +237,10 @@ const AlumniProfile: React.FC = () => {
   );
 };
 
-// Helper Components
 const InfoField: React.FC<{ label: string; value?: string }> = ({ label, value }) => (
   <div>
-    <p className="text-sm font-medium text-gray-500">{label}</p>
-    <p className="mt-1 text-gray-900">{value || 'Not provided'}</p>
+    <p className="text-xs text-gray-500 uppercase tracking-wide">{label}</p>
+    <p className="mt-1 text-gray-800 text-sm">{value || '—'}</p>
   </div>
 );
 
@@ -247,9 +257,7 @@ const EditField: React.FC<{
       name={name}
       value={value}
       onChange={onChange}
-      className="w-full px-4 py-2 border-2 border-gray-200 rounded-xl focus:outline-none"
-      onFocus={(e) => e.target.style.borderColor = '#ba9629'}
-      onBlur={(e) => e.target.style.borderColor = '#e5e7eb'}
+      className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-[#00565c] text-sm"
     />
   </div>
 );
