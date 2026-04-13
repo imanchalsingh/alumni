@@ -52,11 +52,11 @@ const EditModal: React.FC<EditModalProps> = ({ alumni, isOpen, onClose, onSave }
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="px-6 py-4 border-b flex justify-between items-center" style={{ backgroundColor: '#ba9629' }}>
-          <h3 className="text-xl font-semibold text-white">Edit Alumni Details</h3>
+      <div className="bg-white rounded-lg shadow-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="px-6 py-3 border-b bg-[#ba9629] flex justify-between items-center">
+          <h3 className="text-lg font-semibold text-white">Edit Alumni Details</h3>
           <button onClick={onClose} className="text-white hover:text-gray-200 cursor-pointer">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
@@ -72,7 +72,7 @@ const EditModal: React.FC<EditModalProps> = ({ alumni, isOpen, onClose, onSave }
                 value={formData.name || ''}
                 onChange={handleChange}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ba9629]/20 focus:border-[#ba9629] transition-all"
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-[#ba9629] text-sm"
               />
             </div>
 
@@ -83,7 +83,7 @@ const EditModal: React.FC<EditModalProps> = ({ alumni, isOpen, onClose, onSave }
                 name="father_name"
                 value={formData.father_name || ''}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ba9629]/20 focus:border-[#ba9629] transition-all"
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-[#ba9629] text-sm"
               />
             </div>
 
@@ -94,7 +94,7 @@ const EditModal: React.FC<EditModalProps> = ({ alumni, isOpen, onClose, onSave }
                 name="course"
                 value={formData.course || ''}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ba9629]/20 focus:border-[#ba9629] transition-all"
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-[#ba9629] text-sm"
               />
             </div>
 
@@ -106,7 +106,7 @@ const EditModal: React.FC<EditModalProps> = ({ alumni, isOpen, onClose, onSave }
                 value={formData.batch_year || ''}
                 onChange={handleChange}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ba9629]/20 focus:border-[#ba9629] transition-all"
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-[#ba9629] text-sm"
               />
             </div>
 
@@ -117,7 +117,7 @@ const EditModal: React.FC<EditModalProps> = ({ alumni, isOpen, onClose, onSave }
                 name="designation"
                 value={formData.designation || ''}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ba9629]/20 focus:border-[#ba9629] transition-all"
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-[#ba9629] text-sm"
               />
             </div>
 
@@ -128,7 +128,7 @@ const EditModal: React.FC<EditModalProps> = ({ alumni, isOpen, onClose, onSave }
                 name="organization"
                 value={formData.organization || ''}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ba9629]/20 focus:border-[#ba9629] transition-all"
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-[#ba9629] text-sm"
               />
             </div>
 
@@ -139,7 +139,7 @@ const EditModal: React.FC<EditModalProps> = ({ alumni, isOpen, onClose, onSave }
                 name="email"
                 value={formData.email || ''}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ba9629]/20 focus:border-[#ba9629] transition-all"
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-[#ba9629] text-sm"
               />
             </div>
 
@@ -150,7 +150,7 @@ const EditModal: React.FC<EditModalProps> = ({ alumni, isOpen, onClose, onSave }
                 name="mobile_number"
                 value={formData.mobile_number || ''}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ba9629]/20 focus:border-[#ba9629] transition-all"
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-[#ba9629] text-sm"
               />
             </div>
           </div>
@@ -162,7 +162,7 @@ const EditModal: React.FC<EditModalProps> = ({ alumni, isOpen, onClose, onSave }
               value={formData.address || ''}
               onChange={handleChange}
               rows={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ba9629]/20 focus:border-[#ba9629] transition-all"
+              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-[#ba9629] text-sm"
             />
           </div>
 
@@ -170,15 +170,14 @@ const EditModal: React.FC<EditModalProps> = ({ alumni, isOpen, onClose, onSave }
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
+              className="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50 cursor-pointer text-sm"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="px-4 py-2 text-white rounded-lg transition-colors disabled:opacity-50 hover:opacity-90 cursor-pointer"
-              style={{ backgroundColor: '#ba9629' }}
+              className="px-4 py-2 bg-[#ba9629] text-white rounded hover:bg-[#a88523] disabled:opacity-50 cursor-pointer text-sm"
             >
               {loading ? 'Saving...' : 'Save Changes'}
             </button>
@@ -195,15 +194,12 @@ const Alumni: React.FC = () => {
   const [selectedYear, setSelectedYear] = useState<string>("all");
   const [years, setYears] = useState<number[]>([]);
 
-  // Edit modal states
   const [editingAlumni, setEditingAlumni] = useState<Alumni | null>(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  // Delete confirmation states
   const [deletingAlumni, setDeletingAlumni] = useState<Alumni | null>(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
-  // Pagination states
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage] = useState<number>(12);
 
@@ -224,7 +220,6 @@ const Alumni: React.FC = () => {
     }
   };
 
-  // update alumni by id
   const updateAlumni = async (id: string, updatedData: Partial<Alumni>) => {
     try {
       const res = await fetch(`http://localhost:5000/api/admin/alumni/${id}`, {
@@ -243,7 +238,6 @@ const Alumni: React.FC = () => {
     }
   };
 
-  // delete alumni by id
   const deleteAlumni = async (id: string) => {
     try {
       const res = await fetch(`http://localhost:5000/api/admin/alumni/${id}`, {
@@ -275,14 +269,12 @@ const Alumni: React.FC = () => {
     }
   };
 
-  // Filter alumni based on search and selected year
   const filtered = alumni.filter((a) => {
     const matchesSearch = a.name.toLowerCase().includes(search.toLowerCase());
     const matchesYear = selectedYear === "all" || a.batch_year === Number(selectedYear);
     return matchesSearch && matchesYear;
   });
 
-  // Pagination logic
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filtered.slice(indexOfFirstItem, indexOfLastItem);
@@ -295,9 +287,7 @@ const Alumni: React.FC = () => {
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-  // Download CSV function
   const downloadCSV = () => {
-    // Define CSV headers
     const headers = [
       'Name',
       "Father's Name",
@@ -310,7 +300,6 @@ const Alumni: React.FC = () => {
       'Address'
     ];
 
-    // Convert alumni data to CSV rows
     const csvRows = [];
     csvRows.push(headers.join(','));
 
@@ -339,9 +328,7 @@ const Alumni: React.FC = () => {
     window.URL.revokeObjectURL(url);
   };
 
-  // Download Excel function (using CSV with .xls extension)
   const downloadExcel = () => {
-    // Create HTML table for Excel
     let tableHTML = `
       <html>
         <head>
@@ -398,25 +385,20 @@ const Alumni: React.FC = () => {
     window.URL.revokeObjectURL(url);
   };
 
-  // Dark yellow accent color
-  const accentColor = '#ba9629';
-  const accentGradient = 'linear-gradient(135deg, #ba9629 0%, #9e7f22 100%)';
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Main Content */}
-      <div className="py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-100">
+      <div className="py-6 px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold" style={{ color: accentColor }}>BCA Alumni Directory</h1>
-          <p className="text-gray-500 mt-1">Manage and view alumni information</p>
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-gray-800">BCA Alumni Directory</h1>
+          <p className="text-gray-500 text-sm mt-1">Manage and view alumni information</p>
         </div>
 
         {/* Search and Filter Bar */}
-        <div className="p-4 mb-6">
-          <div className="flex flex-col sm:flex-row gap-4">
-            {/* Search Input */}
-            <div className="flex-1 relative">
+        <div className="bg-white rounded-lg shadow-sm p-4 mb-6">
+          <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex-1">
               <input
                 type="text"
                 placeholder="Search by name..."
@@ -425,25 +407,15 @@ const Alumni: React.FC = () => {
                   setSearch(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-md focus:outline-none transition-all duration-200"
-                style={{ borderColor: '#e5e7eb' }}
-                onFocus={(e) => e.target.style.borderColor = accentColor}
-                onBlur={(e) => e.target.style.borderColor = '#e5e7eb'}
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-[#ba9629] text-sm"
               />
-              <svg className="w-5 h-5 text-gray-400 absolute left-3 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
             </div>
 
-            {/* Year Filter Dropdown */}
-            <div className="sm:w-64">
+            <div className="sm:w-56">
               <select
                 value={selectedYear}
                 onChange={handleYearChange}
-                className="w-full px-4 py-3 border-2 cursor-pointer  border-gray-200 rounded-md focus:outline-none transition-all duration-200 bg-white"
-                style={{ borderColor: '#e5e7eb' }}
-                onFocus={(e) => e.target.style.borderColor = accentColor}
-                onBlur={(e) => e.target.style.borderColor = '#e5e7eb'}
+                className="w-full px-3 py-2 border border-gray-300 rounded bg-white cursor-pointer focus:outline-none focus:border-[#ba9629] text-sm"
               >
                 <option value="all">All Batches ({alumni.length})</option>
                 {years.map((year) => {
@@ -457,124 +429,108 @@ const Alumni: React.FC = () => {
               </select>
             </div>
 
-            {/* Download Buttons */}
             <div className="flex gap-2">
               <button
                 onClick={downloadCSV}
-                className="px-4 py-3 rounded-md text-white transition-all duration-200 hover:shadow-md flex items-center gap-2 cursor-pointer"
-                style={{ backgroundColor: accentColor }}
-                title="Download as CSV"
+                className="px-3 py-2 bg-[#ba9629] text-white rounded hover:bg-[#a88523] text-sm cursor-pointer"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                <span className="hidden sm:inline">CSV</span>
+                CSV
               </button>
               <button
                 onClick={downloadExcel}
-                className="px-4 py-3 rounded-md text-white transition-all duration-200 hover:shadow-md flex items-center gap-2 cursor-pointer"
-                style={{ backgroundColor: accentColor }}
-                title="Download as Excel"
+                className="px-3 py-2 bg-[#ba9629] text-white rounded hover:bg-[#a88523] text-sm cursor-pointer"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                <span className="hidden sm:inline">Excel</span>
+                Excel
               </button>
             </div>
           </div>
         </div>
 
         {/* Results Info */}
-        <div className="mb-4 flex justify-between items-center">
+        <div className="mb-4 flex justify-between items-center text-sm">
           <p className="text-gray-600">
             Showing {currentItems.length} of {filtered.length} alumni
           </p>
-          <p className="text-sm text-gray-500">
+          <p className="text-gray-500">
             Page {currentPage} of {totalPages}
           </p>
         </div>
 
         {/* Alumni Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {currentItems.map((a) => (
             <div
               key={a._id}
-              className="bg-white rounded-sm shadow-sm overflow-hidden hover:shadow-md transition-all duration-300 transform "
+              className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow"
             >
-              <div className="px-4 py-3 flex justify-between items-start" style={{ background: accentGradient }}>
-                <div>
-                  <h3 className="text-xl font-semibold text-white truncate">{a.name}</h3>
-                  <p className="text-yellow-100 text-sm">Batch of {a.batch_year}</p>
+              <div className="px-4 py-3 bg-[#ba9629] flex justify-between items-start">
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-lg font-semibold text-white truncate">{a.name}</h3>
+                  <p className="text-yellow-100 text-xs">Batch of {a.batch_year}</p>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="flex space-x-2">
+                <div className="flex space-x-1 ml-2">
                   <button
                     onClick={() => handleEdit(a)}
-                    className="p-1.5 rounded-lg bg-black bg-opacity-20 hover:bg-opacity-30 transition-all cursor-pointer"
+                    className="p-1.5 rounded bg-white/20 hover:bg-white/30 cursor-pointer"
                     title="Edit"
                   >
-                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                     </svg>
                   </button>
                   <button
                     onClick={() => handleDeleteClick(a)}
-                    className="p-1.5 rounded-lg bg-red-700 bg-opacity-20 hover:bg-opacity-30 transition-all cursor-pointer"
+                    className="p-1.5 rounded bg-red-600/80 hover:bg-red-700 cursor-pointer"
                     title="Delete"
                   >
-                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                     </svg>
                   </button>
                 </div>
               </div>
 
-              <div className="p-4 space-y-3">
+              <div className="p-4 space-y-2 text-sm">
                 {a.father_name && (
-                  <p className="text-sm text-gray-600 flex items-center gap-2">
-                    <span className="font-medium" style={{ color: accentColor }}>Father:</span>
-                    <span>{a.father_name}</span>
+                  <p className="text-gray-600">
+                    <span className="font-medium text-[#ba9629]">Father:</span> {a.father_name}
                   </p>
                 )}
 
                 {a.mobile_number && (
-                  <p className="text-sm text-gray-600 flex items-center gap-2">
-                    <span className="font-medium" style={{ color: accentColor }}>Mobile:</span>
-                    <a href={`tel:${a.mobile_number}`} className="hover:underline" style={{ color: accentColor }}>
+                  <p className="text-gray-600">
+                    <span className="font-medium text-[#ba9629]">Mobile:</span>{' '}
+                    <a href={`tel:${a.mobile_number}`} className="text-[#ba9629] hover:underline">
                       {a.mobile_number}
                     </a>
                   </p>
                 )}
 
                 {a.designation && (
-                  <p className="text-sm text-gray-600 flex items-center gap-2">
-                    <span className="font-medium" style={{ color: accentColor }}>Designation:</span>
-                    <span>{a.designation}</span>
+                  <p className="text-gray-600">
+                    <span className="font-medium text-[#ba9629]">Designation:</span> {a.designation}
                   </p>
                 )}
 
                 {a.organization && (
-                  <p className="text-sm text-gray-600 flex items-center gap-2">
-                    <span className="font-medium" style={{ color: accentColor }}>Organization:</span>
-                    <span>{a.organization}</span>
+                  <p className="text-gray-600">
+                    <span className="font-medium text-[#ba9629]">Organization:</span> {a.organization}
                   </p>
                 )}
 
                 {a.email && (
-                  <p className="text-sm text-gray-600 flex items-center gap-2">
-                    <span className="font-medium" style={{ color: accentColor }}>Email:</span>
-                    <a href={`mailto:${a.email}`} className="hover:underline truncate" style={{ color: accentColor }}>
+                  <p className="text-gray-600 truncate">
+                    <span className="font-medium text-[#ba9629]">Email:</span>{' '}
+                    <a href={`mailto:${a.email}`} className="text-[#ba9629] hover:underline">
                       {a.email}
                     </a>
                   </p>
                 )}
 
                 {a.address && (
-                  <p className="text-sm text-gray-600 flex items-start gap-2">
-                    <span className="font-medium" style={{ color: accentColor }}>Address:</span>
-                    <span className="flex-1">{a.address}</span>
+                  <p className="text-gray-600">
+                    <span className="font-medium text-[#ba9629]">Address:</span> {a.address}
                   </p>
                 )}
               </div>
@@ -588,8 +544,7 @@ const Alumni: React.FC = () => {
             <button
               onClick={() => paginate(currentPage - 1)}
               disabled={currentPage === 1}
-              className="px-4 py-2 rounded-lg border disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md cursor-pointer"
-              style={{ borderColor: accentColor, color: accentColor }}
+              className="px-3 py-1.5 rounded border border-gray-300 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed text-sm cursor-pointer"
             >
               Previous
             </button>
@@ -606,11 +561,10 @@ const Alumni: React.FC = () => {
                     <button
                       key={pageNumber}
                       onClick={() => paginate(pageNumber)}
-                      className={`w-10 h-10 rounded-lg transition-all duration-200 cursor-pointer ${currentPage === pageNumber
-                        ? 'text-white'
-                        : 'hover:bg-gray-100'
+                      className={`w-8 h-8 rounded text-sm cursor-pointer ${currentPage === pageNumber
+                        ? 'bg-[#ba9629] text-white'
+                        : 'text-gray-600 hover:bg-gray-100'
                         }`}
-                      style={currentPage === pageNumber ? { backgroundColor: accentColor } : {}}
                     >
                       {pageNumber}
                     </button>
@@ -619,7 +573,7 @@ const Alumni: React.FC = () => {
                   pageNumber === currentPage - 3 ||
                   pageNumber === currentPage + 3
                 ) {
-                  return <span key={pageNumber} className="w-10 h-10 flex items-center justify-center">...</span>;
+                  return <span key={pageNumber} className="w-8 h-8 flex items-center justify-center text-sm text-gray-500">...</span>;
                 }
                 return null;
               })}
@@ -628,8 +582,7 @@ const Alumni: React.FC = () => {
             <button
               onClick={() => paginate(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="px-4 py-2 rounded-lg border disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md cursor-pointer"
-              style={{ borderColor: accentColor, color: accentColor }}
+              className="px-3 py-1.5 rounded border border-gray-300 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed text-sm cursor-pointer"
             >
               Next
             </button>
@@ -638,8 +591,8 @@ const Alumni: React.FC = () => {
 
         {/* Empty state */}
         {filtered.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">No alumni found matching your criteria.</p>
+          <div className="bg-white rounded-lg shadow-sm text-center py-12">
+            <p className="text-gray-500">No alumni found matching your criteria.</p>
           </div>
         )}
       </div>
@@ -658,9 +611,9 @@ const Alumni: React.FC = () => {
       {/* Delete Confirmation Modal */}
       {showDeleteConfirm && deletingAlumni && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl shadow-2xl max-w-md w-full">
-            <div className="px-6 py-4 border-b" style={{ backgroundColor: '#dc2626' }}>
-              <h3 className="text-xl font-semibold text-white">Confirm Delete</h3>
+          <div className="bg-white rounded-lg shadow-lg max-w-md w-full">
+            <div className="px-6 py-3 bg-red-600">
+              <h3 className="text-lg font-semibold text-white">Confirm Delete</h3>
             </div>
             <div className="p-6">
               <p className="text-gray-700 mb-4">
@@ -673,13 +626,13 @@ const Alumni: React.FC = () => {
                     setShowDeleteConfirm(false);
                     setDeletingAlumni(null);
                   }}
-                  className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
+                  className="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50 cursor-pointer text-sm"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={confirmDelete}
-                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors cursor-pointer"
+                  className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 cursor-pointer text-sm"
                 >
                   Delete
                 </button>
